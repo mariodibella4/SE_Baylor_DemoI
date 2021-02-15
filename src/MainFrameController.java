@@ -12,7 +12,7 @@ public class MainFrameController extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
         //above sets the stage below is an example how to manifest the form with in the original frame.
-        //technically its not a Form but a JPanel 
+        //technically its not a Form but a JPanel
         guestLoginForm =new GuestLoginForm();
         guestLoginForm.setVisible(false);
         add(guestLoginForm);
