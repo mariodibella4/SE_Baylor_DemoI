@@ -4,9 +4,9 @@ import java.awt.*;
 public class GuestLoginForm extends JPanel{
     private JButton submitButton;
     private JLabel passwordLabel;
-    private JLabel usernameLabel;
+    private JLabel emailLabel;
     private JPasswordField passwordField;
-    private JTextField usernameField;
+    private JTextField emailField;
     public GuestLoginForm() {
         Dimension dim=getPreferredSize();
         dim.width=400;
@@ -14,9 +14,9 @@ public class GuestLoginForm extends JPanel{
         setBorder(BorderFactory.createTitledBorder("Guest Login"));
 
         passwordField= new JPasswordField(10);
-        usernameField = new JTextField(10);
+        emailField = new JTextField(10);
         submitButton = new JButton("Submit");
-        usernameLabel=new JLabel("Username: ");
+        emailLabel =new JLabel("Email: ");
         passwordLabel=new JLabel("Password: ");
 
         setLayout(new GridBagLayout());
@@ -29,12 +29,12 @@ public class GuestLoginForm extends JPanel{
         gc.gridy=0;
         gc.fill=GridBagConstraints.NONE;
         gc.anchor = GridBagConstraints.LINE_END;
-        add(usernameLabel,gc);
+        add(emailLabel,gc);
 
         gc.gridx=1;
         gc.gridy=0;
         gc.anchor = GridBagConstraints.LINE_START;
-        add(usernameField,gc);
+        add(emailField,gc);
         //Second Row
         gc.weightx=1;
         gc.weighty=.1;

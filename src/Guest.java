@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Guest {
 
     private String firstName;
@@ -7,7 +9,7 @@ public class Guest {
     private String city;
     private String country;
     private String zip;
-
+    public static ArrayList<Guest> registeredGuests= new ArrayList<Guest>();
     public Guest(String firstName,String lastName, String email, String street, String city, String country, String zip) {
         this.firstName = firstName;
         this.lastName=lastName;

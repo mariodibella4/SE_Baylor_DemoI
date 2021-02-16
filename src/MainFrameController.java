@@ -4,8 +4,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MainFrameController extends JFrame {
-    private Toolbar toolbar ;
+
     private GuestLoginForm guestLoginForm;
+    private GuestRegistrationForm guestRegistrationForm;
     public MainFrameController(){
         super("Demo I");
         setSize(600,600);
@@ -13,11 +14,16 @@ public class MainFrameController extends JFrame {
         setVisible(true);
         //above sets the stage below is an example how to manifest the form with in the original frame.
         //technically its not a Form but a JPanel
+        setJMenuBar(createMenuBar());
         guestLoginForm =new GuestLoginForm();
         guestLoginForm.setVisible(false);
         add(guestLoginForm);
 
-        setJMenuBar(createMenuBar());
+        guestRegistrationForm =new GuestRegistrationForm();
+        guestRegistrationForm.setVisible(false);
+        add(guestRegistrationForm);
+
+
 
 
     }
@@ -31,13 +37,20 @@ public class MainFrameController extends JFrame {
         guestMenu.add(guestLogin);
         guestMenu.addSeparator();
         guestMenu.add(guestReg);
+
+        guestReg.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                guestRegistrationForm.setVisible(true);
+            }
+        });
         guestLogin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               JMenuItem item =(JMenuItem)e.getSource();
                 guestLoginForm.setVisible(true);
             }
         });
+
 
 
         JMenu adminMenu=new JMenu("Admin");
