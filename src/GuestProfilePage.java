@@ -1,10 +1,10 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-//work on validators
-public class GuestRegistrationForm extends JPanel{
 
+public class GuestProfilePage extends JPanel {
+    public JButton getLogout() {
+        return logout;
+    }
     private JLabel firstNameLabel;
     private JLabel lastNameLabel;
     private JLabel emailLabel;
@@ -23,13 +23,14 @@ public class GuestRegistrationForm extends JPanel{
     private JLabel passwordLabel;
     private JPasswordField passwordField;
 
-
-
-    GuestRegistrationForm(){
+    private JButton editButton;
+    private JButton logout;
+    GuestProfilePage(Guest g){
         Dimension dim=getPreferredSize();
         dim.width=400;
         setPreferredSize(dim);
-        setBorder(BorderFactory.createTitledBorder("Guest Registration"));
+        setBorder(BorderFactory.createTitledBorder("Guest Profile"));
+        logout=new JButton("Logout");
 
         firstNameLabel=new JLabel("First Name:  ");
         lastNameLabel = new JLabel("Last Name:  ");
@@ -49,7 +50,24 @@ public class GuestRegistrationForm extends JPanel{
         zipField=new JTextField(6);
         passwordField=new JPasswordField(10);
 
-        submitButton = new JButton("Register");
+        firstNameField.setText(g.getFirstName());
+        lastNameField.setText(g.getLastName());
+        emailField.setText(g.getEmail());
+        streetField.setText(g.getStreet());
+        cityField.setText(g.getCity());
+        countryField.setText(g.getCountry());
+        zipField.setText(g.getZip());
+        passwordField.setText(g.getPassword().toString());
+
+        firstNameField.setEditable(false);
+        lastNameField.setEditable(false);
+        emailField.setEditable(false);
+        streetField.setEditable(false);
+        cityField.setEditable(false);
+        countryField.setEditable(false);
+        zipField.setEditable(false);
+        passwordField.setEditable(false);
+
 
         setLayout(new GridBagLayout());
 
@@ -68,6 +86,10 @@ public class GuestRegistrationForm extends JPanel{
         gc.gridy=0;
         gc.anchor = GridBagConstraints.LINE_START;
         add(firstNameField,gc);
+        gc.gridx=4;
+        gc.gridy=0;
+        gc.anchor = GridBagConstraints.EAST;
+        add(logout,gc);
 
         //2nd Row
         gc.weightx=1;
@@ -153,65 +175,12 @@ public class GuestRegistrationForm extends JPanel{
         gc.anchor = GridBagConstraints.LINE_START;
         add(passwordField,gc);
         //7th row
+        editButton=new JButton("Edit");
         gc.weightx=1;
         gc.weighty=1;
         gc.gridx=1;
         gc.gridy=6;
         gc.anchor = GridBagConstraints.FIRST_LINE_START;
-        add(submitButton,gc);
-
-        submitButton.addActionListener(e ->  {
-                    Guest.registeredGuests.add(new
-                            Guest(firstNameField.getText(),
-                            lastNameField.getText(),
-                            emailField.getText(),
-                            streetField.getText(),
-                            cityField.getText(),
-                            countryField.getText(),
-                            zipField.getText(),
-                            passwordField.getPassword()));
-                }
-        );
+        add(editButton,gc);
     }
-    public JTextField getFirstNameField() {
-        return firstNameField;
-    }
-
-    public JTextField getLastNameField() {
-        return lastNameField;
-    }
-
-    public JTextField getEmailField() {
-        return emailField;
-    }
-
-    public JTextField getStreetField() {
-        return streetField;
-    }
-
-    public JTextField getCityField() {
-        return cityField;
-    }
-
-    public JTextField getCountryField() {
-        return countryField;
-    }
-
-    public JTextField getZipField() {
-        return zipField;
-    }
-
-    public JLabel getPasswordLabel() {
-        return passwordLabel;
-    }
-
-    public JPasswordField getPasswordField() {
-        return passwordField;
-    }
-    public JButton getSubmitButton() {
-        return submitButton;
-    }
-
-    private JButton submitButton;
 }
-

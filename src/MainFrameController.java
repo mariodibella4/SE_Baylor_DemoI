@@ -7,6 +7,8 @@ public class MainFrameController extends JFrame {
     public final String HOME_PAGE = "home page";
     public final String GUEST_REG_PAGE = "guest reg page";
     public final String GUEST_LOGIN_PAGE = "guest login page";
+    public final String GUEST_PROFILE_PAGE = "guest profile page";
+    private GuestProfilePage guestProfilePage;
     private GuestLoginForm guestLoginForm;
     private GuestRegistrationForm guestRegistrationForm;
     private final CardLayout cardLayout;
@@ -18,22 +20,51 @@ public class MainFrameController extends JFrame {
         setVisible(true);
         //above sets the stage below is an example how to manifest the form with in the original frame.
         //technically its not a Form but a JPanel
-         mainPane = new JPanel();
+        mainPane = new JPanel();
         mainPane.setPreferredSize(new Dimension(500,500));
         cardLayout=new CardLayout();
         mainPane.setLayout(cardLayout);
+
         guestRegistrationForm =new GuestRegistrationForm();
         guestLoginForm =new GuestLoginForm();
+
+
         mainPane.add(HOME_PAGE,new JPanel());
         mainPane.add(GUEST_REG_PAGE,guestRegistrationForm);
         mainPane.add(GUEST_LOGIN_PAGE,guestLoginForm);
 
+        guestLoginForm.getSubmitButton().addActionListener(e ->{
+            String emailAttempt = guestLoginForm.getEmailField().getText();
+            char[] passwordAttempt=guestLoginForm.getPasswordField().getPassword();
+            String passwordInput=new String(passwordAttempt);
+            for(Guest g : Guest.registeredGuests){
+                String passwordGotten = new String(g.getPassword());
+                if(passwordInput.equals(passwordGotten)&& emailAttempt.equals(g.getEmail())) {
+                    guestProfilePage= new GuestProfilePage(g);
+                    mainPane.add(GUEST_PROFILE_PAGE,guestProfilePage);
+                    cardLayout.show(mainPane,GUEST_PROFILE_PAGE);
+                    guestProfilePage.getLogout().addActionListener(ev -> {cardLayout.show(mainPane,HOME_PAGE);});
+                }
+            }
+            });
+        guestRegistrationForm.getSubmitButton().addActionListener(e ->  {
+                    Guest.registeredGuests.add(new
+                            Guest(guestRegistrationForm.getFirstNameField().getText(),
+                            guestRegistrationForm.getLastNameField().getText(),
+                            guestRegistrationForm.getEmailField().getText(),
+                            guestRegistrationForm.getStreetField().getText(),
+                            guestRegistrationForm.getCityField().getText(),
+                            guestRegistrationForm.getCountryField().getText(),
+                            guestRegistrationForm.getZipField().getText(),
+                            guestRegistrationForm.getPasswordField().getPassword()));
+                    cardLayout.show(mainPane,GUEST_LOGIN_PAGE);
+                }
+        );
+
         mainPane.setVisible(true);
         setLayout(new BorderLayout());
         add(mainPane,BorderLayout.CENTER);
-        //pack();
         setJMenuBar(createMenuBar());
-
 
 
     }
@@ -48,9 +79,6 @@ public class MainFrameController extends JFrame {
         guestMenu.add(guestReg);
         guestReg.addActionListener(e ->cardLayout.show(mainPane,GUEST_REG_PAGE));
         guestLogin.addActionListener(e -> cardLayout.show(mainPane,GUEST_LOGIN_PAGE));
-
-
-
 
         JMenu adminMenu=new JMenu("Admin");
         JMenuItem adminLogin = new JMenuItem("Login");

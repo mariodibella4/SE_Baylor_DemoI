@@ -3,14 +3,20 @@ import java.util.ArrayList;
 public class Guest {
 
     private String firstName;
+
+    public String getLastName() {
+        return lastName;
+    }
+
     private String lastName;
     private String email;
     private String street;
     private String city;
     private String country;
     private String zip;
+    private char[] password;
     public static ArrayList<Guest> registeredGuests= new ArrayList<Guest>();
-    public Guest(String firstName,String lastName, String email, String street, String city, String country, String zip) {
+    public Guest(String firstName,String lastName, String email, String street, String city, String country, String zip,char[] password) {
         this.firstName = firstName;
         this.lastName=lastName;
         this.email = email;
@@ -18,7 +24,16 @@ public class Guest {
         this.city = city;
         this.country = country;
         this.zip = zip;
+        this.password=password;
     }
+    public char[] getPassword() {
+        return password;
+    }
+
+    public void setPassword(char[] password) {
+        this.password = password;
+    }
+
     public String getFirstName() {
         return firstName;
     }

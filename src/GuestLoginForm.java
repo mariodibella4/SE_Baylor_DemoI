@@ -1,12 +1,38 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Arrays;
 
 public class GuestLoginForm extends JPanel{
+    public JButton getSubmitButton() {
+        return submitButton;
+    }
+
     private JButton submitButton;
     private JLabel passwordLabel;
     private JLabel emailLabel;
+
+    public JPasswordField getPasswordField() {
+        return passwordField;
+    }
+
+    public JTextField getEmailField() {
+        return emailField;
+    }
+
     private JPasswordField passwordField;
     private JTextField emailField;
+
+    public boolean isSuccessfulLogin() {
+        return successfulLogin;
+    }
+
+    public void setSuccessfulLogin(boolean successfulLogin) {
+        this.successfulLogin = successfulLogin;
+    }
+
+    private boolean successfulLogin;
     public GuestLoginForm() {
         Dimension dim=getPreferredSize();
         dim.width=400;
@@ -54,7 +80,6 @@ public class GuestLoginForm extends JPanel{
         gc.gridy=2;
         gc.anchor = GridBagConstraints.FIRST_LINE_START;
         add(submitButton,gc);
-
 
 
 
