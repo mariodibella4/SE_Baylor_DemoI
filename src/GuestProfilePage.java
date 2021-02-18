@@ -25,6 +25,7 @@ public class GuestProfilePage extends JPanel {
 
     private JButton editButton;
     private JButton logout;
+    private JButton saveButton;
     GuestProfilePage(Guest g){
         Dimension dim=getPreferredSize();
         dim.width=400;
@@ -182,5 +183,48 @@ public class GuestProfilePage extends JPanel {
         gc.gridy=6;
         gc.anchor = GridBagConstraints.FIRST_LINE_START;
         add(editButton,gc);
+
+        saveButton=new JButton("Save");
+        gc.weightx=1;
+        gc.weighty=1;
+        gc.gridx=1;
+        gc.gridy=6;
+        gc.anchor = GridBagConstraints.FIRST_LINE_START;
+        add(saveButton,gc);
+        saveButton.setVisible(false);
+
+        editButton.addActionListener(e -> {
+            firstNameField.setEditable(true);
+            lastNameField.setEditable(true);
+            emailField.setEditable(true);
+            streetField.setEditable(true);
+            cityField.setEditable(true);
+            countryField.setEditable(true);
+            zipField.setEditable(true);
+            passwordField.setEditable(true);
+
+            editButton.setVisible(false);
+            saveButton.setVisible(true);
+        });
+        saveButton.addActionListener(e1 -> {
+            g.setFirstName(firstNameField.getText());
+            g.setLastName(lastNameField.getText());
+            g.setEmail(emailField.getText());
+            g.setStreet(streetField.getText());
+            g.setCity(cityField.getText());
+            g.setCountry(countryField.getText());
+            g.setZip(zipField.getText());
+            g.setPassword(passwordField.getPassword());
+            firstNameField.setEditable(false);
+            lastNameField.setEditable(false);
+            emailField.setEditable(false);
+            streetField.setEditable(false);
+            cityField.setEditable(false);
+            countryField.setEditable(false);
+            zipField.setEditable(false);
+            passwordField.setEditable(false);
+            saveButton.setVisible(false);
+            editButton.setVisible(true);
+        });
     }
 }

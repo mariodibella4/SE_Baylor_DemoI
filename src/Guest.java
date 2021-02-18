@@ -8,6 +8,10 @@ public class Guest {
         return lastName;
     }
 
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
     private String lastName;
     private String email;
     private String street;

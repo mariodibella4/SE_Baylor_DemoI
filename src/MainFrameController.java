@@ -11,8 +11,10 @@ public class MainFrameController extends JFrame {
     private GuestProfilePage guestProfilePage;
     private GuestLoginForm guestLoginForm;
     private GuestRegistrationForm guestRegistrationForm;
+
     private final CardLayout cardLayout;
     private JPanel mainPane;
+
     public MainFrameController(){
         super("Demo I");
         setSize(600,600);
