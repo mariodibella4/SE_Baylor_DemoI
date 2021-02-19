@@ -3,15 +3,6 @@ import java.util.ArrayList;
 public class Guest {
 
     private String firstName;
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
     private String lastName;
     private String email;
     private String street;
@@ -19,8 +10,14 @@ public class Guest {
     private String country;
     private String zip;
     private char[] password;
-    public static ArrayList<Guest> registeredGuests= new ArrayList<Guest>();
-    public Guest(String firstName,String lastName, String email, String street, String city, String country, String zip,char[] password) {
+
+    public static ArrayList<Guest> getRegisteredGuests() {
+        return registeredGuests;
+    }
+
+
+    private static ArrayList<Guest> registeredGuests= new ArrayList<Guest>();
+    private Guest(String firstName,String lastName, String email, String street, String city, String country, String zip,char[] password) {
         this.firstName = firstName;
         this.lastName=lastName;
         this.email = email;
@@ -30,6 +27,26 @@ public class Guest {
         this.zip = zip;
         this.password=password;
     }
+    public static void addNewGuest(GuestRegistrationForm guestRegistrationForm){
+        Guest.getRegisteredGuests().add(new
+                Guest(guestRegistrationForm.getFirstNameField().getText(),
+                guestRegistrationForm.getLastNameField().getText(),
+                guestRegistrationForm.getEmailField().getText(),
+                guestRegistrationForm.getStreetField().getText(),
+                guestRegistrationForm.getCityField().getText(),
+                guestRegistrationForm.getCountryField().getText(),
+                guestRegistrationForm.getZipField().getText(),
+                guestRegistrationForm.getPasswordField().getPassword()));
+
+    }
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
     public char[] getPassword() {
         return password;
     }

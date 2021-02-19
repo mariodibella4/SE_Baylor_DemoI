@@ -31,7 +31,17 @@ public class GuestLoginForm extends JPanel{
     public void setSuccessfulLogin(boolean successfulLogin) {
         this.successfulLogin = successfulLogin;
     }
-
+    public static Guest validateLogin(GuestLoginForm guestLoginForm){
+        String emailAttempt = guestLoginForm.getEmailField().getText();
+        char[] passwordAttempt=guestLoginForm.getPasswordField().getPassword();
+        String passwordInput=new String(passwordAttempt);
+        for(Guest g : Guest.getRegisteredGuests()) {
+            String passwordGotten = new String(g.getPassword());
+            if (passwordInput.equals(passwordGotten) && emailAttempt.equals(g.getEmail()))
+                return g;
+        }
+        return null;
+    }
     private boolean successfulLogin;
     public GuestLoginForm() {
         Dimension dim=getPreferredSize();

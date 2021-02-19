@@ -161,15 +161,7 @@ public class GuestRegistrationForm extends JPanel{
         add(submitButton,gc);
 
         submitButton.addActionListener(e ->  {
-                    Guest.registeredGuests.add(new
-                            Guest(firstNameField.getText(),
-                            lastNameField.getText(),
-                            emailField.getText(),
-                            streetField.getText(),
-                            cityField.getText(),
-                            countryField.getText(),
-                            zipField.getText(),
-                            passwordField.getPassword()));
+            Guest.addNewGuest(this);
                 }
         );
     }

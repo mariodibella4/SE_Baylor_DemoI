@@ -34,31 +34,19 @@ public class MainFrameController extends JFrame {
         mainPane.add(HOME_PAGE,new JPanel());
         mainPane.add(GUEST_REG_PAGE,guestRegistrationForm);
         mainPane.add(GUEST_LOGIN_PAGE,guestLoginForm);
-
+        //Guest Controller these only pertain to transitioning UI will be cleaner after refactoring
         guestLoginForm.getSubmitButton().addActionListener(e ->{
-            String emailAttempt = guestLoginForm.getEmailField().getText();
-            char[] passwordAttempt=guestLoginForm.getPasswordField().getPassword();
-            String passwordInput=new String(passwordAttempt);
-            for(Guest g : Guest.registeredGuests){
-                String passwordGotten = new String(g.getPassword());
-                if(passwordInput.equals(passwordGotten)&& emailAttempt.equals(g.getEmail())) {
-                    guestProfilePage= new GuestProfilePage(g);
-                    mainPane.add(GUEST_PROFILE_PAGE,guestProfilePage);
-                    cardLayout.show(mainPane,GUEST_PROFILE_PAGE);
-                    guestProfilePage.getLogout().addActionListener(ev -> {cardLayout.show(mainPane,HOME_PAGE);});
-                }
-            }
+                    Guest g =GuestLoginForm.validateLogin(guestLoginForm);
+                    if(g.getPassword()!=null){
+                        //clean it up
+                        guestProfilePage= new GuestProfilePage(g);
+                        mainPane.add(GUEST_PROFILE_PAGE,guestProfilePage);
+                        cardLayout.show(mainPane,GUEST_PROFILE_PAGE);
+                        guestProfilePage.getLogout().addActionListener(ev -> {cardLayout.show(mainPane,HOME_PAGE);});
+                    }
             });
         guestRegistrationForm.getSubmitButton().addActionListener(e ->  {
-                    Guest.registeredGuests.add(new
-                            Guest(guestRegistrationForm.getFirstNameField().getText(),
-                            guestRegistrationForm.getLastNameField().getText(),
-                            guestRegistrationForm.getEmailField().getText(),
-                            guestRegistrationForm.getStreetField().getText(),
-                            guestRegistrationForm.getCityField().getText(),
-                            guestRegistrationForm.getCountryField().getText(),
-                            guestRegistrationForm.getZipField().getText(),
-                            guestRegistrationForm.getPasswordField().getPassword()));
+                    Guest.addNewGuest(guestRegistrationForm);
                     cardLayout.show(mainPane,GUEST_LOGIN_PAGE);
                 }
         );
