@@ -48,7 +48,6 @@ public class GuestRegistrationForm extends JPanel{
         countryField=new JTextField(5);
         zipField=new JTextField(6);
         passwordField=new JPasswordField(10);
-
         submitButton = new JButton("Register");
 
         setLayout(new GridBagLayout());
