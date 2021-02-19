@@ -30,12 +30,10 @@ public class MainFrameController extends JFrame {
         guestRegistrationForm =new GuestRegistrationForm();
         guestLoginForm =new GuestLoginForm();
 
-      //  LoginValidator.LoginValidator(guestLoginForm);
-
         mainPane.add(HOME_PAGE,new JPanel());
         mainPane.add(GUEST_REG_PAGE,guestRegistrationForm);
         mainPane.add(GUEST_LOGIN_PAGE,guestLoginForm);
-
+//Guest Controller eventually will be a facade of controllers
         guestLoginForm.getSubmitButton().addActionListener(e ->{
 
                     Guest g = (Guest)LoginValidator.loginValidator(guestLoginForm);
