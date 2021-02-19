@@ -17,7 +17,7 @@ public class Guest {
 
 
     private static ArrayList<Guest> registeredGuests= new ArrayList<Guest>();
-    private Guest(String firstName,String lastName, String email, String street, String city, String country, String zip,char[] password) {
+    public Guest(String firstName,String lastName, String email, String street, String city, String country, String zip,char[] password) {
         this.firstName = firstName;
         this.lastName=lastName;
         this.email = email;
@@ -26,18 +26,6 @@ public class Guest {
         this.country = country;
         this.zip = zip;
         this.password=password;
-    }
-    public static void addNewGuest(GuestRegistrationForm guestRegistrationForm){
-        Guest.getRegisteredGuests().add(new
-                Guest(guestRegistrationForm.getFirstNameField().getText(),
-                guestRegistrationForm.getLastNameField().getText(),
-                guestRegistrationForm.getEmailField().getText(),
-                guestRegistrationForm.getStreetField().getText(),
-                guestRegistrationForm.getCityField().getText(),
-                guestRegistrationForm.getCountryField().getText(),
-                guestRegistrationForm.getZipField().getText(),
-                guestRegistrationForm.getPasswordField().getPassword()));
-
     }
     public String getLastName() {
         return lastName;

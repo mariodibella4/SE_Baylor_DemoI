@@ -1,7 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.util.Objects;
+
 //current bugs each action produces a new JFrame I'm sure this is an architecture issue
 public class MainFrameController extends JFrame {
     public final String HOME_PAGE = "home page";
@@ -30,15 +30,16 @@ public class MainFrameController extends JFrame {
         guestRegistrationForm =new GuestRegistrationForm();
         guestLoginForm =new GuestLoginForm();
 
+      //  LoginValidator.LoginValidator(guestLoginForm);
 
         mainPane.add(HOME_PAGE,new JPanel());
         mainPane.add(GUEST_REG_PAGE,guestRegistrationForm);
         mainPane.add(GUEST_LOGIN_PAGE,guestLoginForm);
 
-        //Guest Controller these only pertain to transitioning UI will be cleaner after refactoring
-        //anything that has to do with UI (page) transitions happens here
         guestLoginForm.getSubmitButton().addActionListener(e ->{
-                    Guest g =GuestLoginForm.validateLogin(guestLoginForm);
+
+                    Guest g = (Guest)LoginValidator.loginValidator(guestLoginForm);
+                    try{
                     if(g.getPassword()!=null){
                         //clean it up
                         guestProfilePage= new GuestProfilePage(g);
@@ -47,9 +48,12 @@ public class MainFrameController extends JFrame {
                         guestProfilePage.getLogout().addActionListener(ev ->
                         {cardLayout.show(mainPane,HOME_PAGE);});
                     }
+                    }catch (NullPointerException e1){
+                        System.out.println("Remember to register!");
+                    }
             });
         guestRegistrationForm.getSubmitButton().addActionListener(e ->  {
-                    Guest.addNewGuest(guestRegistrationForm);
+                    Register.register(guestRegistrationForm);
                     cardLayout.show(mainPane,GUEST_LOGIN_PAGE);
                 }
         );
