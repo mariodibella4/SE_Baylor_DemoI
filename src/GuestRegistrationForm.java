@@ -160,8 +160,8 @@ public class GuestRegistrationForm extends JPanel{
         add(submitButton,gc);
 
         submitButton.addActionListener(e ->  {
-            Guest.addNewGuest(this);
-                }
+            Register.register(this);
+        }
         );
     }
     public JTextField getFirstNameField() {
