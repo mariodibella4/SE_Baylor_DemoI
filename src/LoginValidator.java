@@ -9,9 +9,19 @@ public class LoginValidator {
 
         String input=form.getClass().toString();
         String guest=guestTemp.getClass().toString();
+        String admin=adminTemp.getClass().toString();
+        String clerk=clerkTemp.getClass().toString();
 
         if(input.equals(guest)){
             return guestLoginValidator(form);
+        }
+
+        else if(input.equals(admin)){
+            return adminLoginValidator(form);
+        }
+
+        else if(input.equals(clerk)){
+            return clerkLoginValidator(form);
         }
 
        return null;
