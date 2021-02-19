@@ -23,6 +23,6 @@ public class Toolbar extends JPanel implements ActionListener {
         JButton clicked = (JButton)e.getSource();
 
         if(clicked==adminButton)
-            new AdminLogin();
+            new AdminLoginForm();
     }
 }

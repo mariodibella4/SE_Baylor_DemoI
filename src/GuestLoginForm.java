@@ -59,17 +59,6 @@ public class GuestLoginForm extends JPanel{
         gc.anchor = GridBagConstraints.FIRST_LINE_START;
         add(submitButton,gc);
     }
-    public static Guest validateLogin(GuestLoginForm guestLoginForm){
-        String emailAttempt = guestLoginForm.getEmailField().getText();
-        char[] passwordAttempt=guestLoginForm.getPasswordField().getPassword();
-        String passwordInput=new String(passwordAttempt);
-        for(Guest g : Guest.getRegisteredGuests()) {
-            String passwordGotten = new String(g.getPassword());
-            if (passwordInput.equals(passwordGotten) && emailAttempt.equals(g.getEmail()))
-                return g;
-        }
-        return null;
-    }
     public JButton getSubmitButton() {
         return submitButton;
     }

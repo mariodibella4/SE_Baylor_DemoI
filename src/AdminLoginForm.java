@@ -1,9 +1,9 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class AdminLogin extends JPanel {
+public class AdminLoginForm extends JPanel {
     private JButton trial;
-    public AdminLogin(){
+    public AdminLoginForm(){
         trial=new JButton("trial");
         setLayout(new FlowLayout(FlowLayout.CENTER));
         add(trial);

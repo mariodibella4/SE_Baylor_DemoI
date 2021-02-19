@@ -10,13 +10,8 @@ public class Guest {
     private String country;
     private String zip;
     private char[] password;
-
-    public static ArrayList<Guest> getRegisteredGuests() {
-        return registeredGuests;
-    }
-
-
     private static ArrayList<Guest> registeredGuests= new ArrayList<Guest>();
+
     public Guest(String firstName,String lastName, String email, String street, String city, String country, String zip,char[] password) {
         this.firstName = firstName;
         this.lastName=lastName;
@@ -26,6 +21,9 @@ public class Guest {
         this.country = country;
         this.zip = zip;
         this.password=password;
+    }
+    public static ArrayList<Guest> getRegisteredGuests() {
+        return registeredGuests;
     }
     public String getLastName() {
         return lastName;

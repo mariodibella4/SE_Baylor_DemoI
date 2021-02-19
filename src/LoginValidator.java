@@ -1,9 +1,8 @@
 import javax.swing.*;
-import java.util.Objects;
 
 public class LoginValidator {
     static GuestLoginForm guestTemp=new GuestLoginForm();
-    static AdminLogin adminTemp=new AdminLogin();
+    static AdminLoginForm adminTemp=new AdminLoginForm();
     static ClerkLoginForm clerkTemp = new ClerkLoginForm();
 
     public  static Object loginValidator(JPanel form){
@@ -13,7 +12,7 @@ public class LoginValidator {
 
         if(input.equals(guest)){
             return guestLoginValidator(form);
-       }
+        }
 
        return null;
     }
