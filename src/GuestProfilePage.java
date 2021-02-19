@@ -60,15 +60,7 @@ public class GuestProfilePage extends JPanel {
         zipField.setText(g.getZip());
         passwordField.setText(g.getPassword().toString());
 
-        firstNameField.setEditable(false);
-        lastNameField.setEditable(false);
-        emailField.setEditable(false);
-        streetField.setEditable(false);
-        cityField.setEditable(false);
-        countryField.setEditable(false);
-        zipField.setEditable(false);
-        passwordField.setEditable(false);
-
+        setFieldsEditableFalse();
 
         setLayout(new GridBagLayout());
 
@@ -194,15 +186,7 @@ public class GuestProfilePage extends JPanel {
         saveButton.setVisible(false);
 
         editButton.addActionListener(e -> {
-            firstNameField.setEditable(true);
-            lastNameField.setEditable(true);
-            emailField.setEditable(true);
-            streetField.setEditable(true);
-            cityField.setEditable(true);
-            countryField.setEditable(true);
-            zipField.setEditable(true);
-            passwordField.setEditable(true);
-
+            setFieldEditableTrue();
             editButton.setVisible(false);
             saveButton.setVisible(true);
         });
@@ -215,16 +199,30 @@ public class GuestProfilePage extends JPanel {
             g.setCountry(countryField.getText());
             g.setZip(zipField.getText());
             g.setPassword(passwordField.getPassword());
-            firstNameField.setEditable(false);
-            lastNameField.setEditable(false);
-            emailField.setEditable(false);
-            streetField.setEditable(false);
-            cityField.setEditable(false);
-            countryField.setEditable(false);
-            zipField.setEditable(false);
-            passwordField.setEditable(false);
+            setFieldsEditableFalse();
             saveButton.setVisible(false);
             editButton.setVisible(true);
         });
+    }
+    private void setFieldsEditableFalse(){
+        firstNameField.setEditable(false);
+        lastNameField.setEditable(false);
+        emailField.setEditable(false);
+        streetField.setEditable(false);
+        cityField.setEditable(false);
+        countryField.setEditable(false);
+        zipField.setEditable(false);
+        passwordField.setEditable(false);
+
+    }
+    private void setFieldEditableTrue(){
+        firstNameField.setEditable(true);
+        lastNameField.setEditable(true);
+        emailField.setEditable(true);
+        streetField.setEditable(true);
+        cityField.setEditable(true);
+        countryField.setEditable(true);
+        zipField.setEditable(true);
+        passwordField.setEditable(true);
     }
 }

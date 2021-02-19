@@ -34,7 +34,9 @@ public class MainFrameController extends JFrame {
         mainPane.add(HOME_PAGE,new JPanel());
         mainPane.add(GUEST_REG_PAGE,guestRegistrationForm);
         mainPane.add(GUEST_LOGIN_PAGE,guestLoginForm);
+
         //Guest Controller these only pertain to transitioning UI will be cleaner after refactoring
+        //anything that has to do with UI (page) transitions happens here
         guestLoginForm.getSubmitButton().addActionListener(e ->{
                     Guest g =GuestLoginForm.validateLogin(guestLoginForm);
                     if(g.getPassword()!=null){
@@ -42,7 +44,8 @@ public class MainFrameController extends JFrame {
                         guestProfilePage= new GuestProfilePage(g);
                         mainPane.add(GUEST_PROFILE_PAGE,guestProfilePage);
                         cardLayout.show(mainPane,GUEST_PROFILE_PAGE);
-                        guestProfilePage.getLogout().addActionListener(ev -> {cardLayout.show(mainPane,HOME_PAGE);});
+                        guestProfilePage.getLogout().addActionListener(ev ->
+                        {cardLayout.show(mainPane,HOME_PAGE);});
                     }
             });
         guestRegistrationForm.getSubmitButton().addActionListener(e ->  {

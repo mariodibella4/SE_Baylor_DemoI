@@ -5,44 +5,12 @@ import java.awt.event.ActionListener;
 import java.util.Arrays;
 
 public class GuestLoginForm extends JPanel{
-    public JButton getSubmitButton() {
-        return submitButton;
-    }
-
     private JButton submitButton;
     private JLabel passwordLabel;
     private JLabel emailLabel;
-
-    public JPasswordField getPasswordField() {
-        return passwordField;
-    }
-
-    public JTextField getEmailField() {
-        return emailField;
-    }
-
     private JPasswordField passwordField;
     private JTextField emailField;
 
-    public boolean isSuccessfulLogin() {
-        return successfulLogin;
-    }
-
-    public void setSuccessfulLogin(boolean successfulLogin) {
-        this.successfulLogin = successfulLogin;
-    }
-    public static Guest validateLogin(GuestLoginForm guestLoginForm){
-        String emailAttempt = guestLoginForm.getEmailField().getText();
-        char[] passwordAttempt=guestLoginForm.getPasswordField().getPassword();
-        String passwordInput=new String(passwordAttempt);
-        for(Guest g : Guest.getRegisteredGuests()) {
-            String passwordGotten = new String(g.getPassword());
-            if (passwordInput.equals(passwordGotten) && emailAttempt.equals(g.getEmail()))
-                return g;
-        }
-        return null;
-    }
-    private boolean successfulLogin;
     public GuestLoginForm() {
         Dimension dim=getPreferredSize();
         dim.width=400;
@@ -90,8 +58,27 @@ public class GuestLoginForm extends JPanel{
         gc.gridy=2;
         gc.anchor = GridBagConstraints.FIRST_LINE_START;
         add(submitButton,gc);
+    }
+    public static Guest validateLogin(GuestLoginForm guestLoginForm){
+        String emailAttempt = guestLoginForm.getEmailField().getText();
+        char[] passwordAttempt=guestLoginForm.getPasswordField().getPassword();
+        String passwordInput=new String(passwordAttempt);
+        for(Guest g : Guest.getRegisteredGuests()) {
+            String passwordGotten = new String(g.getPassword());
+            if (passwordInput.equals(passwordGotten) && emailAttempt.equals(g.getEmail()))
+                return g;
+        }
+        return null;
+    }
+    public JButton getSubmitButton() {
+        return submitButton;
+    }
 
+    public JPasswordField getPasswordField() {
+        return passwordField;
+    }
 
-
+    public JTextField getEmailField() {
+        return emailField;
     }
 }
