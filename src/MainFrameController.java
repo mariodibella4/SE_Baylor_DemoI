@@ -5,6 +5,7 @@ import java.util.Objects;
 //current bugs each action produces a new JFrame I'm sure this is an architecture issue
 public class MainFrameController extends JFrame {
     public final String HOME_PAGE = "home page";
+
     public final String GUEST_REG_PAGE = "guest reg page";
     public final String GUEST_LOGIN_PAGE = "guest login page";
     public final String GUEST_PROFILE_PAGE = "guest profile page";
