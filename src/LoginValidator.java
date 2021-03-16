@@ -1,9 +1,9 @@
 import javax.swing.*;
 
 public class LoginValidator {
-    static GuestLoginForm guestTemp=new GuestLoginForm();
-    static AdminLoginForm adminTemp=new AdminLoginForm();
-    static ClerkLoginForm clerkTemp = new ClerkLoginForm();
+    private static GuestLoginForm guestTemp=new GuestLoginForm();
+    private static AdminLoginForm adminTemp=new AdminLoginForm();
+    private static ClerkLoginForm clerkTemp = new ClerkLoginForm();
 
     public  static Object loginValidator(JPanel form){
 
@@ -17,11 +17,11 @@ public class LoginValidator {
         }
 
         else if(input.equals(admin)){
-            return adminLoginValidator(form);
+           // return adminLoginValidator(form);
         }
 
         else if(input.equals(clerk)){
-            return clerkLoginValidator(form);
+          //  return clerkLoginValidator(form);
         }
 
        return null;
