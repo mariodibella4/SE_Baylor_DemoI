@@ -1,10 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class GuestProfilePage extends JPanel {
-    public JButton getLogout() {
-        return logout;
-    }
+public class ReservationForm extends JPanel {
     private JLabel firstNameLabel;
     private JLabel lastNameLabel;
     private JLabel emailLabel;
@@ -12,27 +9,27 @@ public class GuestProfilePage extends JPanel {
     private JLabel cityLabel;
     private JLabel countryLabel;
     private JLabel zipLabel;
+    private JLabel checkInDate;
+    private JLabel checkOutDate;
     private JTextField firstNameField;
-
     private JTextField lastNameField;
     private JTextField emailField;
     private JTextField streetField;
     private JTextField cityField;
     private JTextField countryField;
     private JTextField zipField;
-    private JLabel passwordLabel;
-    private JPasswordField passwordField;
 
-    private JButton editButton;
-    private JButton logout;
-    private JButton saveButton;
-    GuestProfilePage(Guest g){
+    private JButton editReservation;
+    private JButton commitReservationButton;
+    private JButton changeDatesButton;
+    public ReservationForm(Guest g){
         Dimension dim=getPreferredSize();
-        dim.width=400;
         setPreferredSize(dim);
-        setBorder(BorderFactory.createTitledBorder("Guest Profile"));
-        logout=new JButton("Logout");
-
+        setBorder(BorderFactory.createTitledBorder("Reservation"));
+        String checkinStr=SearchRoomForm.getExpectedCheckin().getText();
+        String checkoutStr=SearchRoomForm.getExpectedCheckout().getText();
+        checkInDate=new JLabel("Check In: "+checkinStr);
+        checkOutDate=new JLabel("Check Out: "+checkoutStr);
         firstNameLabel=new JLabel("First Name:  ");
         lastNameLabel = new JLabel("Last Name:  ");
         emailLabel = new JLabel("Email:  ");
@@ -40,8 +37,7 @@ public class GuestProfilePage extends JPanel {
         cityLabel = new JLabel("City:  ");
         countryLabel= new JLabel("Country:  ");
         zipLabel = new JLabel("Zipcode:  ");
-        passwordLabel = new JLabel("Password:  ");
-
+        editReservation=new JButton("Edit");
         firstNameField=new JTextField(10);
         lastNameField=new JTextField(10);
         emailField =new JTextField(16);
@@ -49,7 +45,6 @@ public class GuestProfilePage extends JPanel {
         cityField=new JTextField(10);
         countryField=new JTextField(5);
         zipField=new JTextField(6);
-        passwordField=new JPasswordField(10);
 
         firstNameField.setText(g.getFirstName());
         lastNameField.setText(g.getLastName());
@@ -58,9 +53,8 @@ public class GuestProfilePage extends JPanel {
         cityField.setText(g.getCity());
         countryField.setText(g.getCountry());
         zipField.setText(g.getZip());
-        passwordField.setText(g.getPassword().toString());
 
-        setFieldsEditableFalse();
+        setFieldEditableTrue();
 
         setLayout(new GridBagLayout());
 
@@ -82,7 +76,7 @@ public class GuestProfilePage extends JPanel {
         gc.gridx=4;
         gc.gridy=0;
         gc.anchor = GridBagConstraints.EAST;
-        add(logout,gc);
+        add(editReservation,gc);
 
         //2nd Row
         gc.weightx=1;
@@ -156,41 +150,22 @@ public class GuestProfilePage extends JPanel {
         gc.anchor = GridBagConstraints.LINE_START;
         add(emailField,gc);
         //6th row
-        gc.weightx=1;
-        gc.weighty=.1;
-        gc.gridx=0;
-        gc.gridy=5;
-        gc.anchor = GridBagConstraints.LINE_END;
-        add(passwordLabel,gc);
 
-        gc.gridx=1;
-        gc.gridy=5;
-        gc.anchor = GridBagConstraints.LINE_START;
-        add(passwordField,gc);
         //7th row
-        editButton=new JButton("Edit");
+        commitReservationButton=new JButton("Commit Reservation");
         gc.weightx=1;
         gc.weighty=1;
         gc.gridx=1;
         gc.gridy=6;
         gc.anchor = GridBagConstraints.FIRST_LINE_START;
-        add(editButton,gc);
+        add(commitReservationButton,gc);
 
-        saveButton=new JButton("Save");
-        gc.weightx=1;
-        gc.weighty=1;
-        gc.gridx=1;
-        gc.gridy=6;
-        gc.anchor = GridBagConstraints.FIRST_LINE_START;
-        add(saveButton,gc);
-        saveButton.setVisible(false);
-
-        editButton.addActionListener(e -> {
+        editReservation.addActionListener(e -> {
             setFieldEditableTrue();
-            editButton.setVisible(false);
-            saveButton.setVisible(true);
+            editReservation.setVisible(false);
+            commitReservationButton.setVisible(true);
         });
-        saveButton.addActionListener(e1 -> {
+        commitReservationButton.addActionListener(e1 -> {
             g.setFirstName(firstNameField.getText());
             g.setLastName(lastNameField.getText());
             g.setEmail(emailField.getText());
@@ -198,10 +173,9 @@ public class GuestProfilePage extends JPanel {
             g.setCity(cityField.getText());
             g.setCountry(countryField.getText());
             g.setZip(zipField.getText());
-            g.setPassword(passwordField.getPassword());
             setFieldsEditableFalse();
-            saveButton.setVisible(false);
-            editButton.setVisible(true);
+            commitReservationButton.setVisible(false);
+            editReservation.setVisible(true);
         });
     }
     private void setFieldsEditableFalse(){
@@ -212,7 +186,6 @@ public class GuestProfilePage extends JPanel {
         cityField.setEditable(false);
         countryField.setEditable(false);
         zipField.setEditable(false);
-        passwordField.setEditable(false);
 
     }
     private void setFieldEditableTrue(){
@@ -223,33 +196,5 @@ public class GuestProfilePage extends JPanel {
         cityField.setEditable(true);
         countryField.setEditable(true);
         zipField.setEditable(true);
-        passwordField.setEditable(true);
-    }
-    public JTextField getFirstNameField() {
-        return firstNameField;
-    }
-
-    public JTextField getLastNameField() {
-        return lastNameField;
-    }
-
-    public JTextField getEmailField() {
-        return emailField;
-    }
-
-    public JTextField getStreetField() {
-        return streetField;
-    }
-
-    public JTextField getCityField() {
-        return cityField;
-    }
-
-    public JTextField getCountryField() {
-        return countryField;
-    }
-
-    public JTextField getZipField() {
-        return zipField;
     }
 }

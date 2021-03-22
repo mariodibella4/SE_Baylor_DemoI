@@ -1,7 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 //work on validators
 public class GuestRegistrationForm extends JPanel{
 
@@ -126,7 +125,6 @@ public class GuestRegistrationForm extends JPanel{
         gc.gridy=3;
         gc.anchor = GridBagConstraints.LINE_START;
         add(zipField,gc);
-
         //5th row
         gc.weightx=1;
         gc.weighty=.1;
@@ -160,7 +158,7 @@ public class GuestRegistrationForm extends JPanel{
         add(submitButton,gc);
 
         submitButton.addActionListener(e ->  {
-            Register.register(this);
+            Register.Register(this);
         }
         );
     }

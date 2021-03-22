@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Room {
 
     private int room_id;
@@ -9,6 +11,8 @@ public class Room {
     private String bedType;
     private char smoking;
     private final int MAX_ROOMS=100;
+    private static ArrayList<Room> rooms=new ArrayList<>();
+
     private Room(int room_id,char available,RoomQuality roomQuality,RoomDescription roomDescription){
         this.room_id=room_id;
         this.available=available;
@@ -27,5 +31,9 @@ public class Room {
     }
     public void setAvailable(char available) {
         this.available = available;
+    }
+
+    public static ArrayList<Room> getRooms() {
+        return rooms;
     }
 }

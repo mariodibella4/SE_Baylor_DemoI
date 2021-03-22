@@ -3,7 +3,7 @@ import javax.swing.*;
 public class Register {
     private static GuestRegistrationForm guestRegTemp=new GuestRegistrationForm();
 
-    public static void register(JPanel form){
+    public static void Register(JPanel form){
 
         String input=form.getClass().toString();
         String guest=guestRegTemp.getClass().toString();
