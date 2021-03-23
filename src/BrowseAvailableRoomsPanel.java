@@ -3,11 +3,11 @@ import javax.swing.border.TitledBorder;
 import java.awt.*;
 
 public class BrowseAvailableRoomsPanel extends JPanel {
-    public JTable getTable() {
+    public static JTable getTable() {
         return table;
     }
 
-    private JTable table;
+    private static JTable table;
 
     public JScrollPane getTablePane() {
         return tablePane;

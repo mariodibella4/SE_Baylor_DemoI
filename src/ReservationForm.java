@@ -11,6 +11,16 @@ public class ReservationForm extends JPanel {
     private JLabel zipLabel;
     private JLabel checkInDate;
     private JLabel checkOutDate;
+    private JLabel creditCardLabel;
+    private JLabel creditExpLabel;
+    private JLabel creditCRVLabel;
+    private JLabel numberOfGuests;
+    private JLabel numberOfRooms;
+    private JLabel billing;
+
+    private JTextField creditCardField;
+    private JTextField creditExpField;
+    private JTextField creditCRVField;
     private JTextField firstNameField;
     private JTextField lastNameField;
     private JTextField emailField;
@@ -22,14 +32,21 @@ public class ReservationForm extends JPanel {
     private JButton editReservation;
     private JButton commitReservationButton;
     private JButton changeDatesButton;
+    private String checkinStr=SearchRoomForm.getExpectedCheckin().getText();
+    private String checkoutStr=SearchRoomForm.getExpectedCheckout().getText();
     public ReservationForm(Guest g){
         Dimension dim=getPreferredSize();
         setPreferredSize(dim);
         setBorder(BorderFactory.createTitledBorder("Reservation"));
-        String checkinStr=SearchRoomForm.getExpectedCheckin().getText();
-        String checkoutStr=SearchRoomForm.getExpectedCheckout().getText();
-        checkInDate=new JLabel("Check In: "+checkinStr);
-        checkOutDate=new JLabel("Check Out: "+checkoutStr);
+
+        billing=new JLabel("Billing Info:");
+        numberOfGuests=new JLabel(String.valueOf(SearchRoomForm.getNumberOfGuestsList().getSelectedIndex()));
+        numberOfRooms=new JLabel(String.valueOf(SearchRoomForm.getNumberOfRoomsList().getSelectedIndex()));
+        creditCardLabel=new JLabel("Please Enter Credit Card:");
+        creditExpLabel=new JLabel("Exp. Date XX/XX");
+        creditCRVLabel=new JLabel("CRV:");
+        checkInDate=new JLabel("Check In: "+checkinStr);//add
+        checkOutDate=new JLabel("Check Out: "+checkoutStr);//add
         firstNameLabel=new JLabel("First Name:  ");
         lastNameLabel = new JLabel("Last Name:  ");
         emailLabel = new JLabel("Email:  ");
@@ -45,7 +62,9 @@ public class ReservationForm extends JPanel {
         cityField=new JTextField(10);
         countryField=new JTextField(5);
         zipField=new JTextField(6);
-
+        creditCardField=new JTextField(16);
+        creditExpField=new JTextField(5);
+        creditCRVField=new JTextField(4);
         firstNameField.setText(g.getFirstName());
         lastNameField.setText(g.getLastName());
         emailField.setText(g.getEmail());
@@ -66,28 +85,46 @@ public class ReservationForm extends JPanel {
         gc.gridx=0;
         gc.gridy=0;
         gc.fill=GridBagConstraints.NONE;
-        gc.anchor = GridBagConstraints.LINE_END;
-        add(firstNameLabel,gc);
+        gc.anchor = GridBagConstraints.LINE_START;
+        add(checkInDate,gc);
 
         gc.gridx=1;
         gc.gridy=0;
         gc.anchor = GridBagConstraints.LINE_START;
-        add(firstNameField,gc);
+        add(checkOutDate,gc);
         gc.gridx=4;
         gc.gridy=0;
         gc.anchor = GridBagConstraints.EAST;
         add(editReservation,gc);
-
+        editReservation.setVisible(false);
         //2nd Row
         gc.weightx=1;
         gc.weighty=.1;
         gc.gridx=0;
         gc.gridy=1;
-        gc.anchor = GridBagConstraints.LINE_END;
-        add(lastNameLabel,gc);
+        gc.fill=GridBagConstraints.NONE;
+        gc.anchor = GridBagConstraints.LINE_START;
+        add(billing,gc);
+        gc.gridx=0;
+        gc.gridy=2;
+        gc.fill=GridBagConstraints.NONE;
+        gc.anchor = GridBagConstraints.LINE_START;
+        add(firstNameLabel,gc);
 
         gc.gridx=1;
-        gc.gridy=1;
+        gc.gridy=2;
+        gc.anchor = GridBagConstraints.LINE_START;
+        add(firstNameField,gc);
+
+        gc.weightx=1;
+        gc.weighty=.1;
+        gc.gridx=2;
+        gc.gridy=2;
+        gc.anchor = GridBagConstraints.LINE_START;
+        add(lastNameLabel,gc);
+
+        gc.gridx=3;
+        gc.gridy=2;
         gc.anchor = GridBagConstraints.LINE_START;
         add(lastNameField,gc);
 
@@ -95,12 +132,12 @@ public class ReservationForm extends JPanel {
         gc.weightx=1;
         gc.weighty=.1;
         gc.gridx=0;
-        gc.gridy=2;
-        gc.anchor = GridBagConstraints.LINE_END;
+        gc.gridy=3;
+        gc.anchor = GridBagConstraints.LINE_START;
         add(streetLabel,gc);
 
         gc.gridx=1;
-        gc.gridy=2;
+        gc.gridy=3;
         gc.anchor = GridBagConstraints.LINE_START;
         add(streetField,gc);
 
@@ -108,32 +145,32 @@ public class ReservationForm extends JPanel {
         gc.weightx=.1;
         gc.weighty=.1;
         gc.gridx=0;
-        gc.gridy=3;
-        gc.anchor = GridBagConstraints.LINE_END;
+        gc.gridy=4;
+        gc.anchor = GridBagConstraints.LINE_START;
         add(cityLabel,gc);
 
         gc.gridx=1;
-        gc.gridy=3;
+        gc.gridy=4;
         gc.anchor = GridBagConstraints.LINE_START;
         add(cityField,gc);
 
         gc.gridx=2;
-        gc.gridy=3;
-        gc.anchor = GridBagConstraints.CENTER;
+        gc.gridy=4;
+        gc.anchor = GridBagConstraints.LINE_START;
         add(countryLabel,gc);
 
         gc.gridx=3;
-        gc.gridy=3;
-        gc.anchor = GridBagConstraints.CENTER;
+        gc.gridy=4;
+        gc.anchor = GridBagConstraints.LINE_START;
         add(countryField,gc);
 
         gc.gridx=4;
-        gc.gridy=3;
-        gc.anchor = GridBagConstraints.LINE_END;
+        gc.gridy=4;
+        gc.anchor = GridBagConstraints.LINE_START;
         add(zipLabel,gc);
 
         gc.gridx=5;
-        gc.gridy=3;
+        gc.gridy=4;
         gc.anchor = GridBagConstraints.LINE_START;
         add(zipField,gc);
 
@@ -141,22 +178,48 @@ public class ReservationForm extends JPanel {
         gc.weightx=1;
         gc.weighty=.1;
         gc.gridx=0;
-        gc.gridy=4;
-        gc.anchor = GridBagConstraints.LINE_END;
+        gc.gridy=5;
+        gc.anchor = GridBagConstraints.LINE_START;
         add(emailLabel,gc);
 
         gc.gridx=1;
-        gc.gridy=4;
+        gc.gridy=5;
         gc.anchor = GridBagConstraints.LINE_START;
         add(emailField,gc);
         //6th row
+        gc.weightx=1;
+        gc.weighty=.1;
+        gc.gridx=0;
+        gc.gridy=6;
+        gc.anchor = GridBagConstraints.LINE_START;
+        add(creditCardLabel,gc);
 
+        gc.gridx=1;
+        gc.gridy=6;
+        gc.anchor = GridBagConstraints.LINE_START;
+        add(creditCardField,gc);
+        gc.gridx=0;
+        gc.gridy=7;
+        gc.anchor = GridBagConstraints.LINE_START;
+        add(creditExpLabel,gc);
+        gc.gridx=1;
+        gc.gridy=7;
+        gc.anchor = GridBagConstraints.LINE_START;
+        add(creditExpField,gc);
+        gc.gridx=2;
+        gc.gridy=7;
+        gc.anchor = GridBagConstraints.LINE_START;
+        add(creditCRVLabel,gc);
+        gc.gridx=3;
+        gc.gridy=7;
+        gc.anchor = GridBagConstraints.LINE_START;
+        add(creditCRVField,gc);
         //7th row
         commitReservationButton=new JButton("Commit Reservation");
         gc.weightx=1;
         gc.weighty=1;
         gc.gridx=1;
-        gc.gridy=6;
+        gc.gridy=9;
         gc.anchor = GridBagConstraints.FIRST_LINE_START;
         add(commitReservationButton,gc);
 
@@ -166,13 +229,23 @@ public class ReservationForm extends JPanel {
             commitReservationButton.setVisible(true);
         });
         commitReservationButton.addActionListener(e1 -> {
+            int col=0;
+            int row =BrowseAvailableRoomsPanel.getTable().getSelectedRow();
+            Reservation reservation= new Reservation(100001,checkinStr,checkoutStr,firstNameField.getText(),
+                                            lastNameField.getText(),Integer.valueOf(numberOfGuests.toString()),
+                                            Integer.valueOf(numberOfRooms.toString()),
+                                            BrowseAvailableRoomsPanel.getTable().getModel().getValueAt(row, col).toString(),
+                                            creditCardField.getText(),creditExpField.getText(),
+                                            Integer.valueOf(creditCRVField.getText()));
+            Reservation.getReservations().add(reservation);
+/*
             g.setFirstName(firstNameField.getText());
             g.setLastName(lastNameField.getText());
             g.setEmail(emailField.getText());
             g.setStreet(streetField.getText());
             g.setCity(cityField.getText());
             g.setCountry(countryField.getText());
-            g.setZip(zipField.getText());
+            g.setZip(zipField.getText());*/
             setFieldsEditableFalse();
             commitReservationButton.setVisible(false);
             editReservation.setVisible(true);
@@ -186,6 +259,9 @@ public class ReservationForm extends JPanel {
         cityField.setEditable(false);
         countryField.setEditable(false);
         zipField.setEditable(false);
+        creditCRVField.setEditable(false);
+        creditExpField.setEditable(false);
+        creditCardField.setEditable(false);
 
     }
     private void setFieldEditableTrue(){

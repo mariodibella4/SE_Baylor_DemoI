@@ -6,7 +6,7 @@ public class Reservation {
 
     private String checkIn;
     private String checkOut;
-    private int numberOfBeds;
+    private String bedType;
     private int res_ID;
     private int numberOfRooms;
     private int numberOfGuests;
@@ -14,16 +14,29 @@ public class Reservation {
     private String lastName;
     private static int MAX_KING=80;
     private static int MAX_DBL_QUEEN=20;
+    private String CC;
+    private String exp;
+    private int CRV;
+
+    public static ArrayList<Reservation> getReservations() {
+        return reservations;
+    }
+
     private static ArrayList<Reservation> reservations=new ArrayList<>();
-    public Reservation(int res_ID,String checkin, String checkout,String firstName,String lastName, int numberOfGuests,int numberOfRooms, int numberOfBeds){
+    public Reservation(int res_ID,String checkin, String checkout,String firstName,
+                       String lastName, int numberOfGuests,int numberOfRooms, String bedType,
+                       String CC,String exp,int CRV){
         this.res_ID=res_ID;
         this.checkIn=checkin;
         this.checkOut=checkout;
         this.numberOfGuests=numberOfGuests;
         this.numberOfRooms=numberOfRooms;
-        this.numberOfBeds=numberOfBeds;
+        this.bedType=bedType;
         this.firstName=firstName;
         this.lastName=lastName;
+        this.CC=CC;
+        this.exp=exp;
+        this.CRV=CRV;
     }
     public String getCheckIn() {
         return checkIn;
@@ -39,14 +52,6 @@ public class Reservation {
 
     public void setCheckOut(String checkOut) {
         this.checkOut = checkOut;
-    }
-
-    public int getNumberOfBeds() {
-        return numberOfBeds;
-    }
-
-    public void setNumberOfBeds(int numberOfBeds) {
-        this.numberOfBeds = numberOfBeds;
     }
 
     public int getRes_ID() {

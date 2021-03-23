@@ -34,10 +34,19 @@ public class SearchRoomForm extends JPanel {
         return astrisk;
     }
 
+    public static JComboBox<Integer> getNumberOfRoomsList() {
+        return numberOfRoomsList;
+    }
+
     private JLabel astrisk;
-    private JComboBox<Integer> numberOfRoomsList;
+    private static JComboBox<Integer> numberOfRoomsList;
     private JLabel numberOfGuests;
-    private JComboBox<Integer> numberOfGuestsList;
+
+    public static JComboBox<Integer> getNumberOfGuestsList() {
+        return numberOfGuestsList;
+    }
+
+    private static JComboBox<Integer> numberOfGuestsList;
     private JCheckBox checkBoxKing;
     private JCheckBox checkBoxTwoQueens;
     private JCheckBox corporateGuest;

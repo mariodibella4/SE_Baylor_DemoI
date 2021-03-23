@@ -16,9 +16,10 @@ public class MainFrameController extends JFrame {
     private SearchRoomForm searchRoomForm;
     private BrowseAvailableRoomsPanel browseAvailableRoomsPanel;
     private JSplitPane searchRoomAndBrowse;
-    private ReservationForm reservationForm;
+    private JSplitPane reservationFormAndTotals;
+    private ReservationTotalsPane reservationTotalsPane;
     private boolean guestLoginBool=false;
-
+    private boolean guestReservationBool=false;
     private final CardLayout cardLayout;
     private JPanel mainPane;
 
@@ -39,7 +40,7 @@ public class MainFrameController extends JFrame {
         guestLoginForm =new GuestLoginForm();
         searchRoomForm=new SearchRoomForm();
         browseAvailableRoomsPanel=new BrowseAvailableRoomsPanel();
-
+        reservationTotalsPane=new ReservationTotalsPane();
         searchRoomAndBrowse= SearchRoomAndBrowseSplitPane.searchRoomAndBrowseSplitPane(searchRoomForm,browseAvailableRoomsPanel);
 
 
@@ -71,8 +72,13 @@ public class MainFrameController extends JFrame {
                     cardLayout.show(mainPane,GUEST_LOGIN_PAGE);
                 }
         );
+
         browseAvailableRoomsPanel.getMakeRes().addActionListener(e -> {
-            mainPane.add(GUEST_RESERVATION_PAGE,new ReservationForm(guest));
+            reservationFormAndTotals=ReservationFormAndTotalsSplitPane.
+                                        reservationFormAndTotalsSplitPane(new ReservationForm(guest),reservationTotalsPane);
+            mainPane.add(GUEST_RESERVATION_PAGE,reservationFormAndTotals);
+            guestReservationBool=true;
+            setJMenuBar(createMenuBar());
             cardLayout.show(mainPane,GUEST_RESERVATION_PAGE);
         });
 
@@ -92,7 +98,7 @@ public class MainFrameController extends JFrame {
         JMenuItem guestProfile=new JMenuItem("Profile");
         JMenuItem guestLogout=new JMenuItem("Logout");
         JMenuItem searchPage=new JMenuItem("Search Available Rooms");
-
+        JMenuItem reservationPage=new JMenuItem("Reservations");
 
         if(guestLoginBool){
             guestMenu.add(guestProfile);
@@ -100,11 +106,16 @@ public class MainFrameController extends JFrame {
             guestMenu.add(searchPage);
             guestMenu.addSeparator();
             guestMenu.add(guestLogout);
+            if(guestReservationBool){
+                guestMenu.addSeparator();
+                guestMenu.add(reservationPage);
+            }
 
             guestProfile.addActionListener(e ->cardLayout.show(mainPane,GUEST_PROFILE_PAGE));
             guestLogout.addActionListener(e -> {
                 cardLayout.show(mainPane,HOME_PAGE);
                 guestLoginBool=false;
+                guestReservationBool=false;
                 setJMenuBar(createMenuBar());
             });
             searchPage.addActionListener(e ->cardLayout.show(mainPane,GUEST_SEARCH_PAGE));
