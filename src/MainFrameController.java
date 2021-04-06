@@ -22,7 +22,6 @@ public class MainFrameController extends JFrame {
     private boolean guestReservationBool=false;
     private final CardLayout cardLayout;
     private JPanel mainPane;
-
     private Guest guest;
     public MainFrameController(){
         super("Demo I");

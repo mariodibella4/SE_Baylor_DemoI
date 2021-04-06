@@ -19,6 +19,47 @@ public class ReservationForm extends JPanel {
     private JLabel billing;
 
     private JTextField creditCardField;
+
+    public JTextField getCreditCardField() {
+        return creditCardField;
+    }
+
+    public JTextField getCreditExpField() {
+        return creditExpField;
+    }
+
+    public JTextField getCreditCRVField() {
+        return creditCRVField;
+    }
+
+    public JTextField getFirstNameField() {
+        return firstNameField;
+    }
+
+    public JTextField getLastNameField() {
+        return lastNameField;
+    }
+
+    public JTextField getEmailField() {
+        return emailField;
+    }
+
+    public JTextField getStreetField() {
+        return streetField;
+    }
+
+    public JTextField getCityField() {
+        return cityField;
+    }
+
+    public JTextField getCountryField() {
+        return countryField;
+    }
+
+    public JTextField getZipField() {
+        return zipField;
+    }
+
     private JTextField creditExpField;
     private JTextField creditCRVField;
     private JTextField firstNameField;
@@ -28,6 +69,14 @@ public class ReservationForm extends JPanel {
     private JTextField cityField;
     private JTextField countryField;
     private JTextField zipField;
+
+    public JButton getEditReservation() {
+        return editReservation;
+    }
+
+    public JButton getCommitReservationButton() {
+        return commitReservationButton;
+    }
 
     private JButton editReservation;
     private JButton commitReservationButton;
