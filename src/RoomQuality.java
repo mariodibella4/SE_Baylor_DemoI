@@ -1,35 +1,31 @@
 public class RoomQuality {
 
     private int qualityLevel;
-    private float maxRate;
+    private int maxRate;
 
     private RoomQuality(int qualityLevel, int maxRate) {
         this.qualityLevel = qualityLevel;
         this.maxRate = maxRate;
     }
-    public static RoomQuality levelOne(int maxRate){
-        return new RoomQuality(1,maxRate);
-    }
-    public static RoomQuality levelTwo(int maxRate){
+    public static RoomQuality levelStandard(int maxRate){
         return new RoomQuality(2,maxRate);
     }
     public static RoomQuality levelThree(int maxRate){
         return new RoomQuality(3,maxRate);
     }
-
+    public static RoomQuality levelFour(int maxRate){
+        return new RoomQuality(4,maxRate);
+    }
+    public static RoomQuality levelFive(int maxRate){
+        return new RoomQuality(5,maxRate);
+    }
     public int getQualityLevel() {
         return qualityLevel;
     }
 
-    public void setQualityLevel(int qualityLevel) {
-        this.qualityLevel = qualityLevel;
-    }
 
-    public float getMaxRate() {
+    public int getMaxRate() {
         return maxRate;
     }
 
-    public void setMaxRate(int maxRate) {
-        this.maxRate = maxRate;
-    }
 }

@@ -6,7 +6,7 @@ public class Reservation {
 
     private String checkIn;
     private String checkOut;
-    private String bedType;
+    private String[] bedType;
     private int res_ID;
     private int numberOfRooms;
     private int numberOfGuests;
@@ -17,6 +17,8 @@ public class Reservation {
     private String CC;
     private String exp;
     private int CRV;
+    private int[] quality;
+    private char[] smoking;
 
     public static ArrayList<Reservation> getReservations() {
         return reservations;
@@ -24,14 +26,20 @@ public class Reservation {
 
     private static ArrayList<Reservation> reservations=new ArrayList<>();
     public Reservation(int res_ID,String checkin, String checkout,String firstName,
-                       String lastName, int numberOfGuests,int numberOfRooms, String bedType,
+                       String lastName, int numberOfGuests, Room[] room,
                        String CC,String exp,int CRV){
         this.res_ID=res_ID;
         this.checkIn=checkin;
         this.checkOut=checkout;
         this.numberOfGuests=numberOfGuests;
-        this.numberOfRooms=numberOfRooms;
-        this.bedType=bedType;
+        this.numberOfRooms=room.length;
+        for(int i=0;i<room.length;i++)
+                this.bedType[i]=room[i].getBedType();
+        for(int i=0;i<room.length;i++)
+            this.quality[i]=room[i].getQuality();
+        for(int i=0;i<room.length;i++)
+            this.smoking[i]=room[i].getSmoking();
+
         this.firstName=firstName;
         this.lastName=lastName;
         this.CC=CC;

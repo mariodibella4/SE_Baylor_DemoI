@@ -81,16 +81,16 @@ public class ReservationForm extends JPanel {
     private JButton editReservation;
     private JButton commitReservationButton;
     private JButton changeDatesButton;
-    private String checkinStr=SearchRoomForm.getExpectedCheckin().getText();
-    private String checkoutStr=SearchRoomForm.getExpectedCheckout().getText();
-    public ReservationForm(Guest g){
+    private String checkinStr;
+    private String checkoutStr;
+    public ReservationForm(Guest g,Room[]rooms){
         Dimension dim=getPreferredSize();
         setPreferredSize(dim);
         setBorder(BorderFactory.createTitledBorder("Reservation"));
-
+        checkinStr=SearchRoomForm.getExpectedCheckin().getText();
+         checkoutStr=SearchRoomForm.getExpectedCheckout().getText();
         billing=new JLabel("Billing Info:");
         numberOfGuests=new JLabel(String.valueOf(SearchRoomForm.getNumberOfGuestsList().getSelectedIndex()));
-        numberOfRooms=new JLabel(String.valueOf(SearchRoomForm.getNumberOfRoomsList().getSelectedIndex()));
         creditCardLabel=new JLabel("Please Enter Credit Card:");
         creditExpLabel=new JLabel("Exp. Date XX/XX");
         creditCRVLabel=new JLabel("CRV:");
@@ -278,23 +278,13 @@ public class ReservationForm extends JPanel {
             commitReservationButton.setVisible(true);
         });
         commitReservationButton.addActionListener(e1 -> {
-            int col=0;
-            int row =BrowseAvailableRoomsPanel.getTable().getSelectedRow();
+
             Reservation reservation= new Reservation(100001,checkinStr,checkoutStr,firstNameField.getText(),
                                             lastNameField.getText(),Integer.valueOf(numberOfGuests.toString()),
-                                            Integer.valueOf(numberOfRooms.toString()),
-                                            BrowseAvailableRoomsPanel.getTable().getModel().getValueAt(row, col).toString(),
+                                            rooms,
                                             creditCardField.getText(),creditExpField.getText(),
                                             Integer.valueOf(creditCRVField.getText()));
             Reservation.getReservations().add(reservation);
-/*
-            g.setFirstName(firstNameField.getText());
-            g.setLastName(lastNameField.getText());
-            g.setEmail(emailField.getText());
-            g.setStreet(streetField.getText());
-            g.setCity(cityField.getText());
-            g.setCountry(countryField.getText());
-            g.setZip(zipField.getText());*/
             setFieldsEditableFalse();
             commitReservationButton.setVisible(false);
             editReservation.setVisible(true);
@@ -321,5 +311,8 @@ public class ReservationForm extends JPanel {
         cityField.setEditable(true);
         countryField.setEditable(true);
         zipField.setEditable(true);
+        creditCRVField.setEditable(true);
+        creditExpField.setEditable(true);
+        creditCardField.setEditable(true);
     }
 }

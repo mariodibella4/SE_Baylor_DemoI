@@ -2,19 +2,53 @@ import java.util.ArrayList;
 
 public class Room {
 
-    private int room_id;
     private char available;
+
+    public int getQuality() {
+        return quality;
+    }
+
+    public int getCurrentRate() {
+        return currentRate;
+    }
+
+    public float getMaxRate() {
+        return maxRate;
+    }
+
+    public int getNumberOfBeds() {
+        return numberOfBeds;
+    }
+
+    public String getBedType() {
+        return bedType;
+    }
+
+    public char getSmoking() {
+        return smoking;
+    }
+
+    public int getMAX_ROOMS() {
+        return MAX_ROOMS;
+    }
+
     private int quality;
-    private float currentRate;
-    private float maxRate;
+    private int currentRate;
+    private int maxRate;
     private int numberOfBeds;
     private String bedType;
     private char smoking;
+
+    public String getGeneralDescription() {
+        return generalDescription;
+    }
+
+    private String generalDescription;
     private final int MAX_ROOMS=100;
     private static ArrayList<Room> rooms=new ArrayList<>();
 
-    private Room(int room_id,char available,RoomQuality roomQuality,RoomDescription roomDescription){
-        this.room_id=room_id;
+    public Room(char available,RoomQuality roomQuality,RoomDescription roomDescription){
+
         this.available=available;
         this.quality=roomQuality.getQualityLevel();
         this.maxRate=roomQuality.getMaxRate();
@@ -22,9 +56,7 @@ public class Room {
         this.numberOfBeds=roomDescription.getNumberOfBeds();
         this.bedType=roomDescription.getBedType();
         this.smoking= roomDescription.getSmoking();
-    }
-    public int getRoom_id() {
-        return room_id;
+        this.generalDescription=roomDescription.getGeneralDescription();
     }
     public char getAvailable() {
         return available;

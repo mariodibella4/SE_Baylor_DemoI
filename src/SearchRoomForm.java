@@ -12,8 +12,8 @@ public class SearchRoomForm extends JPanel {
     }
 
     private JButton submitButton;
-    private JButton checkinCal;
-    private JButton checkoutCal;
+    private  JButton checkinCal;
+    private  JButton checkoutCal;
 
     public static JTextField getExpectedCheckin() {
         return expectedCheckin;
@@ -28,18 +28,13 @@ public class SearchRoomForm extends JPanel {
     private JLabel checkIn;
     private JLabel checkOut;
     private JFrame calPopup;
-    private JLabel numberOfRooms;
 
     public JLabel getAstrisk() {
         return astrisk;
     }
 
-    public static JComboBox<Integer> getNumberOfRoomsList() {
-        return numberOfRoomsList;
-    }
 
     private JLabel astrisk;
-    private static JComboBox<Integer> numberOfRoomsList;
     private JLabel numberOfGuests;
 
     public static JComboBox<Integer> getNumberOfGuestsList() {
@@ -66,10 +61,8 @@ public class SearchRoomForm extends JPanel {
         checkIn=new JLabel("Check in:");
         checkOut=new JLabel("Check out:");
         numberOfGuests=new JLabel("Number of Guests:");
-        numberOfRooms=new JLabel("Number of Rooms:");
         Integer[] list=new Integer[]{1,2,3,4,5,6,7};
         numberOfGuestsList=new JComboBox(list);
-        numberOfRoomsList=new JComboBox(list);
         checkBoxKing=new JCheckBox("King Size Bed");
         checkBoxTwoQueens=new JCheckBox("Two Queens");
         corporateGuest=new JCheckBox("Corp Acct");
@@ -126,32 +119,21 @@ public class SearchRoomForm extends JPanel {
         gc.anchor = GridBagConstraints.LINE_START;
         add(numberOfGuestsList,gc);
         //Fourth Row
-        gc.weightx=1;
-        gc.weighty=.1;
-        gc.gridx=0;
-        gc.gridy=3;
-        gc.anchor = GridBagConstraints.LINE_START;
-        add(numberOfRooms,gc);
 
-        gc.gridx=1;
-        gc.gridy=3;
-        gc.anchor = GridBagConstraints.LINE_START;
-        add(numberOfRoomsList,gc);
-        //Fifth Row
         gc.weightx=1;
         gc.weighty=.1;
         gc.gridx=0;
-        gc.gridy=4;
+        gc.gridy=3;
         gc.anchor = GridBagConstraints.LINE_START;
         add(checkBoxKing,gc);
 
         gc.gridx=0;
-        gc.gridy=5;
+        gc.gridy=4;
         gc.anchor = GridBagConstraints.LINE_START;
         add(checkBoxTwoQueens,gc);
 
         gc.gridx=0;
-        gc.gridy=6;
+        gc.gridy=5;
         gc.anchor = GridBagConstraints.LINE_START;
         add(corporateGuest,gc);
 

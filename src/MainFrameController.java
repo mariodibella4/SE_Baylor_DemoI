@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 //current bugs each action produces a new JFrame I'm sure this is an architecture issue
 public class MainFrameController extends JFrame {
@@ -39,7 +40,7 @@ public class MainFrameController extends JFrame {
         guestLoginForm =new GuestLoginForm();
         searchRoomForm=new SearchRoomForm();
         browseAvailableRoomsPanel=new BrowseAvailableRoomsPanel();
-        reservationTotalsPane=new ReservationTotalsPane();
+
         searchRoomAndBrowse= SearchRoomAndBrowseSplitPane.searchRoomAndBrowseSplitPane(searchRoomForm,browseAvailableRoomsPanel);
 
 
@@ -73,8 +74,29 @@ public class MainFrameController extends JFrame {
         );
 
         browseAvailableRoomsPanel.getMakeRes().addActionListener(e -> {
+            JTable table=BrowseAvailableRoomsPanel.getTable();
+            int rows =table.getRowCount();
+            int j=0;
+            for(int i=0;i<rows;i++){
+                if(table.getModel().getValueAt(i,0).toString()!="0"){
+                    j+=(int) table.getModel().getValueAt(i,0);
+                }
+            }
+            Room[] rooms=new Room[j];
+            int l=0;
+            for(int i=0;i<rows;i++){
+                if(table.getModel().getValueAt(i,0).toString()!="0"){
+                    int k=0;
+                    while(k<(int) table.getModel().getValueAt(i,0)) {
+                        rooms[l++] = RoomModel.getAvailableRooms().get(i);
+                        k++;
+                    }
+                }
+            }
+            reservationTotalsPane=new ReservationTotalsPane(new ReservationTotalsCalculator(SearchRoomForm.getExpectedCheckin().getText(),
+                                            SearchRoomForm.getExpectedCheckout().getText(),rooms),rooms);
             reservationFormAndTotals=ReservationFormAndTotalsSplitPane.
-                                        reservationFormAndTotalsSplitPane(new ReservationForm(guest),reservationTotalsPane);
+                                        reservationFormAndTotalsSplitPane(new ReservationForm(guest,rooms),reservationTotalsPane);
             mainPane.add(GUEST_RESERVATION_PAGE,reservationFormAndTotals);
             guestReservationBool=true;
             setJMenuBar(createMenuBar());
