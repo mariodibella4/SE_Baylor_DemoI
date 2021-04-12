@@ -1,3 +1,5 @@
+import UI.AdminLoginForm;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -9,7 +11,7 @@ public class Toolbar extends JPanel implements ActionListener {
     private JButton adminButton;
     public Toolbar(){
         guestButton=new JButton("Guest");
-        clerkButton =new JButton("Clerk");
+        clerkButton =new JButton("app.Clerk");
         adminButton =new JButton("Admin");
 
         setLayout(new FlowLayout(FlowLayout.LEFT));
