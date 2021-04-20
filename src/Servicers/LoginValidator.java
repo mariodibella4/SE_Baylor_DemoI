@@ -23,7 +23,7 @@ public class LoginValidator {
         }
 
         else if(input.equals(admin)){
-           // return adminLoginValidator(form);
+            return adminLoginValidator(form);
         }
 
         else if(input.equals(clerk)){
@@ -43,6 +43,20 @@ public class LoginValidator {
             if (passwordInput.equals(passwordGotten) && emailAttempt.equals(g.getEmail()))
                 return g;
         }
+        return null;
+    }
+
+    public static Admin adminLoginValidator(JPanel form) {
+        AdminLoginForm adminLoginForm = (AdminLoginForm)form;
+        char[] passwordAttempt = adminLoginForm.getPasswordField().getPassword();
+        String passwordInput = new String(passwordAttempt);
+
+        for(Admin a : Admin.getRegisteredAdmins()) {
+            String passwordGotten = new String(a.getPassword());
+            if(passwordInput.equals(passwordGotten))
+                return a;
+        }
+
         return null;
     }
 }

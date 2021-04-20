@@ -245,9 +245,7 @@ public class GuestProfilePage extends JPanel {
         return streetField;
     }
 
-    public JTextField getCityField() {
-        return cityField;
-    }
+    public JTextField getCityField() { return cityField; }
 
     public JTextField getCountryField() {
         return countryField;

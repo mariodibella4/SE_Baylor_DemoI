@@ -7,6 +7,7 @@ import UI.*;
 import Servicers.Register;
 import UI.splitpanes.ReservationFormAndTotalsSplitPane;
 import UI.splitpanes.SearchRoomAndBrowseSplitPane;
+import app.Admin;
 import app.Guest;
 import app.Room;
 
@@ -22,10 +23,12 @@ public class MainFrameController extends JFrame {
     public final String GUEST_PROFILE_PAGE = "guest profile page";
     public final String GUEST_SEARCH_PAGE = "guest search page";
     public final String GUEST_RESERVATION_PAGE = "guest reservation page";
+    public final String ADMIN_LOGIN_PAGE = "admin login page";
     private GuestProfilePage guestProfilePage;
     private GuestLoginForm guestLoginForm;
     private GuestRegistrationForm guestRegistrationForm;
     private SearchRoomForm searchRoomForm;
+    private AdminLoginForm adminLoginForm;
     private BrowseAvailableRoomsPanel browseAvailableRoomsPanel;
     private JSplitPane searchRoomAndBrowse;
     private JSplitPane reservationFormAndTotals;
@@ -35,6 +38,7 @@ public class MainFrameController extends JFrame {
     private final CardLayout cardLayout;
     private JPanel mainPane;
     private Guest guest;
+
     public MainFrameController(){
         super("Demo I");
         setSize(1200,600);
@@ -51,14 +55,16 @@ public class MainFrameController extends JFrame {
         guestLoginForm =new GuestLoginForm();
         searchRoomForm=new SearchRoomForm();
         browseAvailableRoomsPanel=new BrowseAvailableRoomsPanel();
+        adminLoginForm = new AdminLoginForm();
 
         searchRoomAndBrowse= SearchRoomAndBrowseSplitPane.searchRoomAndBrowseSplitPane(searchRoomForm,browseAvailableRoomsPanel);
-
 
         mainPane.add(HOME_PAGE,new JPanel());
         mainPane.add(GUEST_REG_PAGE,guestRegistrationForm);
         mainPane.add(GUEST_LOGIN_PAGE,guestLoginForm);
         mainPane.add(GUEST_SEARCH_PAGE,searchRoomAndBrowse);
+        mainPane.add(ADMIN_LOGIN_PAGE, adminLoginForm);
+
 //Guest Controller eventually will be a facade of controllers
         guestLoginForm.getSubmitButton().addActionListener(e ->{
 
@@ -91,8 +97,8 @@ public class MainFrameController extends JFrame {
         add(mainPane,BorderLayout.CENTER);
         setJMenuBar(createMenuBar());
 
-
     }
+
     private void makeReservation(BrowseAvailableRoomsPanel browseAvailableRoomsPanel){
         browseAvailableRoomsPanel.getMakeRes().addActionListener(e -> {
 
@@ -129,6 +135,7 @@ public class MainFrameController extends JFrame {
         setJMenuBar(createMenuBar());
         cardLayout.show(mainPane,GUEST_RESERVATION_PAGE);
     }
+
     private JMenuBar createMenuBar(){
         JMenuBar menuBar = new JMenuBar();
 
@@ -174,10 +181,13 @@ public class MainFrameController extends JFrame {
         JMenu clerkMenu=new JMenu("app.Clerk");
         JMenuItem clerkLogin = new JMenuItem("Login");
         clerkMenu.add(clerkLogin);
-
+        
         menuBar.add(clerkMenu);
         menuBar.add(guestMenu);
         menuBar.add(adminMenu);
         return menuBar;
     }
+
+    Admin superAdmin = new Admin();
+
 }

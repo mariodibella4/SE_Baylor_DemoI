@@ -11,7 +11,7 @@ public class Toolbar extends JPanel implements ActionListener {
     private JButton adminButton;
     public Toolbar(){
         guestButton=new JButton("Guest");
-        clerkButton =new JButton("app.Clerk");
+        clerkButton =new JButton("Clerk");
         adminButton =new JButton("Admin");
 
         setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -21,7 +21,7 @@ public class Toolbar extends JPanel implements ActionListener {
         add(adminButton);
 
     }
-    public  void actionPerformed(ActionEvent e){
+    public void actionPerformed(ActionEvent e){
         JButton clicked = (JButton)e.getSource();
 
         if(clicked==adminButton)
