@@ -45,7 +45,7 @@ public class BrowseAvailableRoomsPanel extends JPanel {
         rec2=RoomModel.parseAvailableRooms();
 
         String[] header = { "Select Quantity","Type", "Quality", "Description","Current Rate/night*" };
-        makeRes=new JButton("Make app.Reservation");
+        makeRes=new JButton("Make Reservation");
         makeRes.setVisible(false);
         table = new JTable(rec2,header);
         table.setShowHorizontalLines(true);

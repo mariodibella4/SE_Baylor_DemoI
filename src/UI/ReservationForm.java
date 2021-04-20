@@ -88,9 +88,21 @@ public class ReservationForm extends JPanel {
     }
 
     private JButton editReservation;
+
+    public JButton getCancelReservation() {
+        return cancelReservation;
+    }
+
+    private JButton cancelReservation;
     private JButton commitReservationButton;
     private JButton changeDatesButton;
     private String checkinStr;
+
+    public int getGuestID() {
+        return guestID;
+    }
+
+    private int guestID;
 
     public String getCheckinStr() {
         return checkinStr;
@@ -128,6 +140,7 @@ public class ReservationForm extends JPanel {
         this.countryLabel= new JLabel("Country:  ");
         this.zipLabel = new JLabel("Zipcode:  ");
         this.editReservation=new JButton("Edit");
+        this.cancelReservation=new JButton("Cancel");
         this.firstNameField=new JTextField(10);
         this.lastNameField=new JTextField(10);
         this.emailField =new JTextField(16);
@@ -145,7 +158,8 @@ public class ReservationForm extends JPanel {
         this.cityField.setText(g.getCity());
         this.countryField.setText(g.getCountry());
         this.zipField.setText(g.getZip());
-
+        this.rooms=rooms;
+        this.guestID=g.getId();
 
         setLayout(new GridBagLayout());
 
@@ -169,6 +183,11 @@ public class ReservationForm extends JPanel {
         gc.anchor = GridBagConstraints.EAST;
         add(editReservation,gc);
         editReservation.setVisible(false);
+        gc.gridx=5;
+        gc.gridy=0;
+        gc.anchor = GridBagConstraints.EAST;
+        add(cancelReservation,gc);
+        cancelReservation.setVisible(false);
         //2nd Row
         gc.weightx=1;
         gc.weighty=.1;

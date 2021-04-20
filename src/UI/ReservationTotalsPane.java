@@ -44,7 +44,7 @@ public class ReservationTotalsPane extends JPanel {
 
         String[] headers={"No.","Type","Lvl"};
          tableRooms=new JTable(summary,headers);
-        tableRooms.getTableHeader().setVisible(true);
+        tableRooms.setVisible(true);
         add(tableRooms);
          setLayout(new GridBagLayout());
 

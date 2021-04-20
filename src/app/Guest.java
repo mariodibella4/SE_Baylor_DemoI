@@ -3,6 +3,11 @@ import java.util.ArrayList;
 
 public class Guest {
 
+    public int getId() {
+        return id;
+    }
+
+    private int id;
     private String firstName;
     private String lastName;
     private String email;
@@ -13,7 +18,8 @@ public class Guest {
     private char[] password;
     private static ArrayList<Guest> registeredGuests= new ArrayList<Guest>();
 
-    public Guest(String firstName,String lastName, String email, String street, String city, String country, String zip,char[] password) {
+    public Guest(int id,String firstName,String lastName, String email, String street, String city, String country, String zip,char[] password) {
+        this.id=id;
         this.firstName = firstName;
         this.lastName=lastName;
         this.email = email;

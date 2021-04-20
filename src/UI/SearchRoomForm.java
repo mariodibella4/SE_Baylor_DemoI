@@ -36,6 +36,14 @@ public class SearchRoomForm extends JPanel {
         return expectedCheckout;
     }
 
+    public static void setExpectedCheckin(JTextField expectedCheckin) {
+        SearchRoomForm.expectedCheckin = expectedCheckin;
+    }
+
+    public static void setExpectedCheckout(JTextField expectedCheckout) {
+        SearchRoomForm.expectedCheckout = expectedCheckout;
+    }
+
     private static JTextField expectedCheckin;
     private static JTextField expectedCheckout;
     private JLabel checkIn;

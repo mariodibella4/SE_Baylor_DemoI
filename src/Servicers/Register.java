@@ -19,7 +19,7 @@ public class Register {
     }
     private static void addNewGuest(GuestRegistrationForm guestRegistrationForm){
         Guest.getRegisteredGuests().add(new
-                Guest(guestRegistrationForm.getFirstNameField().getText(),
+                Guest(1,guestRegistrationForm.getFirstNameField().getText(),
                 guestRegistrationForm.getLastNameField().getText(),
                 guestRegistrationForm.getEmailField().getText(),
                 guestRegistrationForm.getStreetField().getText(),
