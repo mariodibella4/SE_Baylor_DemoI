@@ -35,4 +35,19 @@ public class RoomModel {
                 RoomQuality.levelStandard(899),
                 new RoomDescription(699,1,"Two Queen",'N',"Studio With gorgeous views and Playstation")));
     }
+    public static Object[][] parseAvailableRooms(){
+        Object[][] rec2= new Object[getAvailableRooms().size()][5];
+        for(int i = 0; i< getAvailableRooms().size(); i++){
+
+            rec2[i][0]=0;
+            rec2[i][1]= getAvailableRooms().get(i).getBedType()+" Bed";
+            if(getAvailableRooms().get(i).getQuality()==2)
+                rec2[i][2]= "Level: Standard";
+            else
+                rec2[i][2]= "Level: "+ getAvailableRooms().get(i).getQuality();
+            rec2[i][3]= getAvailableRooms().get(i).getGeneralDescription();
+            rec2[i][4]="$"+Integer.toString(getAvailableRooms().get(i).getCurrentRate());
+        }
+        return rec2;
+    }
 }

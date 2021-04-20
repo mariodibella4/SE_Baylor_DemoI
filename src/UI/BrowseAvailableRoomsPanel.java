@@ -25,6 +25,11 @@ public class BrowseAvailableRoomsPanel extends JPanel {
     }
 
     private JButton makeRes;
+
+    public JComboBox<Integer> getNumberOfRooms() {
+        return numberOfRooms;
+    }
+
     private JComboBox<Integer> numberOfRooms;
     private Object[][] rec2;
     public BrowseAvailableRoomsPanel(){
@@ -41,21 +46,11 @@ public class BrowseAvailableRoomsPanel extends JPanel {
 
 
         RoomModel.retrieveAvailableRooms(SearchRoomForm.getExpectedCheckin().toString(),SearchRoomForm.getExpectedCheckout().toString());
-        rec2=new Object[RoomModel.getAvailableRooms().size()][5];
-            for(int i = 0; i< RoomModel.getAvailableRooms().size(); i++){
 
-                rec2[i][0]=0;
-                rec2[i][1]= RoomModel.getAvailableRooms().get(i).getBedType()+" Bed";
-                if(RoomModel.getAvailableRooms().get(i).getQuality()==2)
-                    rec2[i][2]= "Level: Standard";
-                else
-                    rec2[i][2]= "Level: "+ RoomModel.getAvailableRooms().get(i).getQuality();
-                rec2[i][3]= RoomModel.getAvailableRooms().get(i).getGeneralDescription();
-                rec2[i][4]="$"+Integer.toString(RoomModel.getAvailableRooms().get(i).getCurrentRate());
-            }
+        rec2=RoomModel.parseAvailableRooms();
 
         String[] header = { "Select Quantity","Type", "Quality", "Description","Current Rate/night*" };
-        makeRes=new JButton("Make app.Reservation");
+        makeRes=new JButton("Make Reservation");
         makeRes.setVisible(false);
         table = new JTable(rec2,header);
         table.setShowHorizontalLines(true);
@@ -83,7 +78,7 @@ public class BrowseAvailableRoomsPanel extends JPanel {
         add(tablePane);
         add(makeRes);
     }
-    class CheckBoxCellRenderer implements TableCellRenderer {
+     class CheckBoxCellRenderer implements TableCellRenderer {
         JComboBox combo;
         public CheckBoxCellRenderer(JComboBox comboBox) {
             this.combo = new JComboBox();

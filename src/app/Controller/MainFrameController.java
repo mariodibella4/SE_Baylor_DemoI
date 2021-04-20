@@ -8,10 +8,12 @@ import Servicers.Register;
 import UI.splitpanes.ReservationFormAndTotalsSplitPane;
 import UI.splitpanes.SearchRoomAndBrowseSplitPane;
 import app.Admin;
+import app.handlers.SearchRoomAndBrowseSplitPaneHandler;
 import app.Guest;
 import app.Room;
 
 import javax.swing.*;
+import javax.swing.table.TableColumn;
 import java.awt.*;
 
 //current bugs each action produces a new JFrame I'm sure this is an architecture issue
@@ -32,6 +34,12 @@ public class MainFrameController extends JFrame {
     private BrowseAvailableRoomsPanel browseAvailableRoomsPanel;
     private JSplitPane searchRoomAndBrowse;
     private JSplitPane reservationFormAndTotals;
+
+    public static JTabbedPane getResverationsTabbed() {
+        return resverationsTabbed;
+    }
+
+    private static JTabbedPane resverationsTabbed= new JTabbedPane();
     private ReservationTotalsPane reservationTotalsPane;
     private boolean guestLoginBool=false;
     private boolean guestReservationBool=false;
@@ -57,7 +65,7 @@ public class MainFrameController extends JFrame {
         browseAvailableRoomsPanel=new BrowseAvailableRoomsPanel();
         adminLoginForm = new AdminLoginForm();
 
-        searchRoomAndBrowse= SearchRoomAndBrowseSplitPane.searchRoomAndBrowseSplitPane(searchRoomForm,browseAvailableRoomsPanel);
+        searchRoomAndBrowse= SearchRoomAndBrowseSplitPaneHandler.searchRoomAndBrowseSplitPane(searchRoomForm,browseAvailableRoomsPanel);
 
         mainPane.add(HOME_PAGE,new JPanel());
         mainPane.add(GUEST_REG_PAGE,guestRegistrationForm);
@@ -101,11 +109,19 @@ public class MainFrameController extends JFrame {
 
     private void makeReservation(BrowseAvailableRoomsPanel browseAvailableRoomsPanel){
         browseAvailableRoomsPanel.getMakeRes().addActionListener(e -> {
-
             finishReservation(reservationTotalsPane);
-
+            //refresh
+            searchRoomForm.getCheckoutCal().setVisible(false);
+            SearchRoomForm.getExpectedCheckin().setText("");
+            SearchRoomForm.getExpectedCheckout().setText("");
+            searchRoomForm.getCheckBoxKing().setSelected(false);
+            searchRoomForm.getCheckBoxTwoQueens().setSelected(false);
+            searchRoomForm.getCorporateGuest().setSelected(false);
+            browseAvailableRoomsPanel.getTablePane().setVisible(false);
+            browseAvailableRoomsPanel.getMakeRes().setVisible(false);
         });
     }
+
     private void finishReservation(ReservationTotalsPane reservationTotalsPane){
         JTable table=BrowseAvailableRoomsPanel.getTable();
         int rows =table.getRowCount();
@@ -130,7 +146,8 @@ public class MainFrameController extends JFrame {
                 SearchRoomForm.getExpectedCheckout().getText(),rooms),rooms);
         reservationFormAndTotals= ReservationFormAndTotalsSplitPane.
                 reservationFormAndTotalsSplitPane(new ReservationForm(guest,rooms),reservationTotalsPane);
-        mainPane.add(GUEST_RESERVATION_PAGE,reservationFormAndTotals);
+        resverationsTabbed.add("New Reservation",reservationFormAndTotals);
+        mainPane.add(GUEST_RESERVATION_PAGE,resverationsTabbed);
         guestReservationBool=true;
         setJMenuBar(createMenuBar());
         cardLayout.show(mainPane,GUEST_RESERVATION_PAGE);
@@ -156,6 +173,9 @@ public class MainFrameController extends JFrame {
             if(guestReservationBool){
                 guestMenu.addSeparator();
                 guestMenu.add(reservationPage);
+                reservationPage.addActionListener(e -> {
+                    cardLayout.show(mainPane,GUEST_RESERVATION_PAGE);
+                });
             }
 
             guestProfile.addActionListener(e ->cardLayout.show(mainPane,GUEST_PROFILE_PAGE));
@@ -165,7 +185,9 @@ public class MainFrameController extends JFrame {
                 guestReservationBool=false;
                 setJMenuBar(createMenuBar());
             });
-            searchPage.addActionListener(e ->cardLayout.show(mainPane,GUEST_SEARCH_PAGE));
+            searchPage.addActionListener(e ->{
+                cardLayout.show(mainPane,GUEST_SEARCH_PAGE);
+            });
         }else{
             guestMenu.add(guestLogin);
             guestMenu.addSeparator();
@@ -181,7 +203,7 @@ public class MainFrameController extends JFrame {
         JMenu clerkMenu=new JMenu("app.Clerk");
         JMenuItem clerkLogin = new JMenuItem("Login");
         clerkMenu.add(clerkLogin);
-        
+
         menuBar.add(clerkMenu);
         menuBar.add(guestMenu);
         menuBar.add(adminMenu);
