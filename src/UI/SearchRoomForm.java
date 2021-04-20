@@ -68,6 +68,19 @@ public class SearchRoomForm extends JPanel {
     }
 
     private static JComboBox<Integer> numberOfGuestsList;
+
+    public JCheckBox getCheckBoxKing() {
+        return checkBoxKing;
+    }
+
+    public JCheckBox getCheckBoxTwoQueens() {
+        return checkBoxTwoQueens;
+    }
+
+    public JCheckBox getCorporateGuest() {
+        return corporateGuest;
+    }
+
     private JCheckBox checkBoxKing;
     private JCheckBox checkBoxTwoQueens;
     private JCheckBox corporateGuest;

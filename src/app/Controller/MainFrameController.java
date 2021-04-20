@@ -11,6 +11,7 @@ import app.Guest;
 import app.Room;
 
 import javax.swing.*;
+import javax.swing.table.TableColumn;
 import java.awt.*;
 
 //current bugs each action produces a new JFrame I'm sure this is an architecture issue
@@ -104,9 +105,13 @@ public class MainFrameController extends JFrame {
             finishReservation(reservationTotalsPane);
             //refresh
             searchRoomForm.getCheckoutCal().setVisible(false);
-            browseAvailableRoomsPanel.getMakeRes().setVisible(false);
             SearchRoomForm.getExpectedCheckin().setText("");
             SearchRoomForm.getExpectedCheckout().setText("");
+            searchRoomForm.getCheckBoxKing().setSelected(false);
+            searchRoomForm.getCheckBoxTwoQueens().setSelected(false);
+            searchRoomForm.getCorporateGuest().setSelected(false);
+            browseAvailableRoomsPanel.getTablePane().setVisible(false);
+            browseAvailableRoomsPanel.getMakeRes().setVisible(false);
         });
     }
 

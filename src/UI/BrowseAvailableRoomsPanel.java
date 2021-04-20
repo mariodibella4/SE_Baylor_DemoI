@@ -25,6 +25,11 @@ public class BrowseAvailableRoomsPanel extends JPanel {
     }
 
     private JButton makeRes;
+
+    public JComboBox<Integer> getNumberOfRooms() {
+        return numberOfRooms;
+    }
+
     private JComboBox<Integer> numberOfRooms;
     private Object[][] rec2;
     public BrowseAvailableRoomsPanel(){
@@ -73,7 +78,7 @@ public class BrowseAvailableRoomsPanel extends JPanel {
         add(tablePane);
         add(makeRes);
     }
-    class CheckBoxCellRenderer implements TableCellRenderer {
+     class CheckBoxCellRenderer implements TableCellRenderer {
         JComboBox combo;
         public CheckBoxCellRenderer(JComboBox comboBox) {
             this.combo = new JComboBox();
