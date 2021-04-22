@@ -1,12 +1,16 @@
 package UI;
 
+import Servicers.ClerksTable;
 import app.Admin;
 import javax.swing.*;
 import java.awt.*;
+import app.Clerk;
 
-public class AdminProfilePage extends JPanel {
-    public JButton getLogout() {
-        return logoutButton;
+public class AdminProfilePage extends JPanel
+{
+    public JButton getLogout()
+    {
+        return logout;
     }
 
     private JLabel firstNameLabel;
@@ -18,15 +22,19 @@ public class AdminProfilePage extends JPanel {
     private JLabel passwordLabel;
     private JPasswordField passwordField;
     private JButton editButton;
-    private JButton logoutButton;
+    private JButton logout;
     private JButton saveButton;
+    private JLabel clerksLabel;
+    private JTable clerksTable;
+    private Object[][] tm;
+
 
     public AdminProfilePage(Admin a) {
         Dimension dim = getPreferredSize();
         dim.width = 400;
         setPreferredSize(dim);
         setBorder(BorderFactory.createTitledBorder("Admin Profile"));
-        logoutButton = new JButton("Logout");
+        logout = new JButton("Logout");
 
         firstNameLabel=new JLabel("First Name:  ");
         lastNameLabel = new JLabel("Last Name:  ");
@@ -43,6 +51,20 @@ public class AdminProfilePage extends JPanel {
         emailField.setText(a.getEmail());
         passwordField.setText(a.getPassword().toString());
 
+
+        clerksLabel = new JLabel("Registered Clerks: ");
+
+        String[] clerkTableHeader = {"Clerk ID", "First Name", "Last Name", "Email"};
+        tm = ClerksTable.parseClerksList();
+        clerksTable = new JTable(tm, clerkTableHeader);
+        clerksTable.setShowHorizontalLines(true);
+        clerksTable.setShowVerticalLines(false);
+        clerksTable.setGridColor(Color.blue);
+        clerksTable.setVisible(true);
+        clerksTable.setRowSelectionAllowed(false);
+        clerksTable.setRowHeight(20);
+        clerksTable.setMinimumSize(new Dimension(800, 400));
+
         setFieldsEditableFalse();
         setLayout(new GridBagLayout());
         GridBagConstraints gc = new GridBagConstraints();
@@ -56,14 +78,12 @@ public class AdminProfilePage extends JPanel {
         gc.anchor = GridBagConstraints.LINE_END;
         add(firstNameLabel, gc);
 
+
         gc.gridx=1;
         gc.gridy=0;
         gc.anchor = GridBagConstraints.LINE_START;
         add(firstNameField, gc);
-        gc.gridx=4;
-        gc.gridy=0;
-        gc.anchor = GridBagConstraints.EAST;
-        add(logoutButton, gc);
+
 
         //2nd Row
         gc.weightx=1;
@@ -91,6 +111,21 @@ public class AdminProfilePage extends JPanel {
         gc.anchor = GridBagConstraints.LINE_START;
         add(emailField, gc);
 
+
+        //Clerks List
+        gc.weightx=1;
+        gc.weighty=.1;
+        gc.gridx=0;
+        gc.gridy=3;
+        gc.anchor = GridBagConstraints.LINE_END;
+        add(clerksLabel, gc);
+
+        gc.gridx=0;
+        gc.gridy=4;
+        gc.anchor = GridBagConstraints.LINE_START;
+        add(clerksTable, gc);
+
+        setFieldsEditableFalse();
     }
 
 

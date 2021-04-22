@@ -27,7 +27,7 @@ public class LoginValidator {
         }
 
         else if(input.equals(clerk)){
-          //  return clerkLoginValidator(form);
+            return clerkLoginValidator(form);
         }
 
        return null;
@@ -56,7 +56,20 @@ public class LoginValidator {
             if(passwordInput.equals(passwordGotten))
                 return a;
         }
+        return null;
+    }
 
+    public static Clerk clerkLoginValidator(JPanel form){
+
+        ClerkLoginForm clerkLoginForm = (ClerkLoginForm)form;
+        String emailAttempt = clerkLoginForm.getEmailField().getText();
+        char[] passwordAttempt = clerkLoginForm.getPasswordField().getPassword();
+        String passwordInput = new String(passwordAttempt);
+        for(Clerk c : Clerk.getRegisteredClerks()) {
+            String passwordGotten = new String(c.getPassword());
+            if (passwordInput.equals(passwordGotten) && emailAttempt.equals(c.getEmail()))
+                return c;
+        }
         return null;
     }
 }

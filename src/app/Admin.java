@@ -31,6 +31,9 @@ public class Admin {
     public static ArrayList<Admin> getRegisteredAdmins() {
         return registeredAdmins;
     }
+    public static void addRegisteredAdmin(Admin a) {
+        registeredAdmins.add(a);
+    }
 
     public String getLastName() {
         return lastName;
