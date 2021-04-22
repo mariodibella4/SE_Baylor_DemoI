@@ -64,6 +64,7 @@ public class AdminProfilePage extends JPanel
         clerksTable.setRowSelectionAllowed(false);
         clerksTable.setRowHeight(20);
         clerksTable.setMinimumSize(new Dimension(800, 400));
+        clerksTable.getTableHeader().setVisible(true);
 
         setFieldsEditableFalse();
         setLayout(new GridBagLayout());
@@ -120,7 +121,7 @@ public class AdminProfilePage extends JPanel
         gc.anchor = GridBagConstraints.LINE_END;
         add(clerksLabel, gc);
 
-        gc.gridx=0;
+        gc.gridx=1;
         gc.gridy=4;
         gc.anchor = GridBagConstraints.LINE_START;
         add(clerksTable, gc);
