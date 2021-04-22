@@ -46,10 +46,13 @@ public class AdminLoginForm extends JPanel {
         add(submitButton, gc);
     }
 
-    public JButton getSubmitButton() {
+    public JButton getSubmitButton()
+    {
         return submitButton;
     }
-    public JPasswordField getPasswordField() {
+
+    public JPasswordField getPasswordField()
+    {
         return passwordField;
     }
 

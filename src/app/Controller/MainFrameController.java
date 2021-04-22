@@ -6,7 +6,7 @@ import Servicers.RoomModel;
 import UI.*;
 import Servicers.Register;
 import UI.splitpanes.ReservationFormAndTotalsSplitPane;
-import UI.splitpanes.SearchRoomAndBrowseSplitPane;
+//import UI.splitpanes.SearchRoomAndBrowseSplitPane;
 import app.Admin;
 import app.handlers.SearchRoomAndBrowseSplitPaneHandler;
 import app.Guest;
@@ -23,6 +23,7 @@ public class MainFrameController extends JFrame {
     public final String GUEST_REG_PAGE = "guest reg page";
     public final String GUEST_LOGIN_PAGE = "guest login page";
     public final String GUEST_PROFILE_PAGE = "guest profile page";
+    public final String ADMIN_PROFILE_PAGE = "admin profile page";
     public final String GUEST_SEARCH_PAGE = "guest search page";
     public final String GUEST_RESERVATION_PAGE = "guest reservation page";
     public final String ADMIN_LOGIN_PAGE = "admin login page";
@@ -31,6 +32,7 @@ public class MainFrameController extends JFrame {
     private GuestRegistrationForm guestRegistrationForm;
     private SearchRoomForm searchRoomForm;
     private AdminLoginForm adminLoginForm;
+    private AdminProfilePage adminProfilePage;
     private BrowseAvailableRoomsPanel browseAvailableRoomsPanel;
     private JSplitPane searchRoomAndBrowse;
     private JSplitPane reservationFormAndTotals;
@@ -42,10 +44,12 @@ public class MainFrameController extends JFrame {
     private static JTabbedPane resverationsTabbed= new JTabbedPane();
     private ReservationTotalsPane reservationTotalsPane;
     private boolean guestLoginBool=false;
+    private boolean adminLoginBool = false;
     private boolean guestReservationBool=false;
     private final CardLayout cardLayout;
     private JPanel mainPane;
     private Guest guest;
+    private Admin admin;
 
     public MainFrameController(){
         super("Demo I");
@@ -153,6 +157,30 @@ public class MainFrameController extends JFrame {
         cardLayout.show(mainPane,GUEST_RESERVATION_PAGE);
     }
 
+    // Admin Login Verification
+    adminLoginForm.getSubmitButton().addActionListener(e ->{
+        admin = (Admin) LoginValidator.loginValidator(adminLoginForm);
+        try {
+            if (admin.getPassword() != null) {
+
+                adminProfilePage = new AdminProfilePage(admin);
+                mainPane.add(ADMIN_PROFILE_PAGE, adminProfilePage);
+                adminLoginBool = true;
+                cardLayout.show(mainPane, ADMIN_PROFILE_PAGE);
+
+                adminProfilePage.getLogout().addActionListener(ev ->
+                {
+                    cardLayout.show(mainPane, HOME_PAGE);
+                });
+                setJMenuBar(createMenuBar());
+            }
+        }catch (NullPointerException e1) {
+            System.out.println("null pointer exception when admin logging in");
+        }
+    });
+
+
+
     private JMenuBar createMenuBar(){
         JMenuBar menuBar = new JMenuBar();
 
@@ -163,6 +191,8 @@ public class MainFrameController extends JFrame {
         JMenuItem guestLogout=new JMenuItem("Logout");
         JMenuItem searchPage=new JMenuItem("Search Available Rooms");
         JMenuItem reservationPage=new JMenuItem("Reservations");
+
+
 
         if(guestLoginBool){
             guestMenu.add(guestProfile);
@@ -200,9 +230,16 @@ public class MainFrameController extends JFrame {
         JMenuItem adminLogin = new JMenuItem("Login");
         adminMenu.add(adminLogin);
 
-        JMenu clerkMenu=new JMenu("app.Clerk");
+        adminMenu.add(adminLogin);
+        adminMenu.addSeparator();
+        adminLogin.addActionListener(e -> cardLayout.show(mainPane,ADMIN_LOGIN_PAGE));
+
+
+
+        JMenu clerkMenu=new JMenu("Clerk");
         JMenuItem clerkLogin = new JMenuItem("Login");
         clerkMenu.add(clerkLogin);
+
 
         menuBar.add(clerkMenu);
         menuBar.add(guestMenu);
