@@ -89,30 +89,32 @@ public class AdminProfilePage extends JPanel
         //2nd Row
         gc.weightx=1;
         gc.weighty=.1;
-        gc.gridx=0;
-        gc.gridy=1;
+        gc.gridx=2;
+        gc.gridy=0;
         gc.anchor = GridBagConstraints.LINE_END;
         add(lastNameLabel, gc);
 
-        gc.gridx=1;
-        gc.gridy=1;
+        gc.gridx=3;
+        gc.gridy=0;
         gc.anchor = GridBagConstraints.LINE_START;
         add(lastNameField, gc);
 
         //3rd row
         gc.weightx=1;
         gc.weighty=.1;
-        gc.gridx=0;
-        gc.gridy=2;
+        gc.gridx=4;
+        gc.gridy=0;
         gc.anchor = GridBagConstraints.LINE_END;
         add(emailLabel, gc);
 
-        gc.gridx=1;
-        gc.gridy=2;
+        gc.gridx=5;
+        gc.gridy=0;
         gc.anchor = GridBagConstraints.LINE_START;
         add(emailField, gc);
+        
+        add(clerksTable);
 
-
+/*
         //Clerks List
         gc.weightx=1;
         gc.weighty=.1;
@@ -124,7 +126,7 @@ public class AdminProfilePage extends JPanel
         gc.gridx=1;
         gc.gridy=4;
         gc.anchor = GridBagConstraints.LINE_START;
-        add(clerksTable, gc);
+        add(clerksTable, gc);*/
 
         setFieldsEditableFalse();
     }
